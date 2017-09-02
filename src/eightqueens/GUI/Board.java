@@ -19,8 +19,8 @@ public class Board extends JPanel {
 	public static final int GAP = 40;
 	private static final Color TEXT_COLOR = Color.BLACK;
 	private static final Color LINE_COLOR = Color.GRAY;
-//	private static final Color SAFE_COLOR = new Color(48, 164, 237);
-	private static final Color SAFE_COLOR = new Color(165, 255, 43);
+	private static final Color SAFE_COLOR = new Color(170, 194, 237);
+//	private static final Color SAFE_COLOR = new Color(165, 255, 43);
 
 	/**
 	 * Board data
@@ -360,7 +360,7 @@ public class Board extends JPanel {
 				continue;
 			drawImage(g, new Position(row, col).toPoint(sizeOfCell), ImageUtil.queen);
 			drawDangerArea(g);
-//			drawSafeArea(g);
+			drawSafeArea(g);
 		}
 	}
 

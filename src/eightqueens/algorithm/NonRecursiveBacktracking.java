@@ -65,10 +65,9 @@ public class NonRecursiveBacktracking extends Thread {
                 row++;
                 if (row >= N){
                     polling.pauseSolving();
-                    if (!polling.paused()) {
-                    	revertLastValidColumn(col);
-                        continue;
-                    }
+                    checkingPause();
+                    revertLastValidColumn(col);
+                    continue;
                 }
                 startCol = -1;
             } else {

@@ -112,11 +112,12 @@ public class MainUI extends JFrame {
     		board.setInspectionCell(new Position(row, col), valid);
         board.repaint();
         lblRowVal.setText(row + 1 + "");
+        if (col >= 0)
+            lblColVal.setText(letter[col]);
         if (valid) {
         	lblColSolution[row].setText(letter[col]);
-            lblColVal.setText(letter[col]);
         } else {
-        	lblColSolution[row].setText("NA");;
+        	lblColSolution[row].setText("NA");
         }
     }
 
@@ -148,8 +149,9 @@ public class MainUI extends JFrame {
     private int controlHeight = 30;
     private int controlWidth = 100;
     private int labelSolutionSize = 35;
+    private Color btnColor = new Color(43, 87, 154);
 //    private Color btnColor = new Color(0, 131, 235);
-    private Color btnColor = new Color(105, 183, 0);
+//    private Color btnColor = new Color(105, 183, 0);
 
 	/**
 	 * Init GUI
