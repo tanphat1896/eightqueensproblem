@@ -1,4 +1,10 @@
 eclipse.preferences.version=1
-encoding//src/eightqueens/GUI/Board.java=UTF-8
-encoding//src/eightqueens/GUI/MainUI.java=UTF-8
 encoding//src/eightqueens/algorithm/NonRecursiveBacktracking.java=UTF-8
+encoding//src/eightqueens/algorithm/PureBacktracking.java=UTF-8
+encoding//src/eightqueens/ui/BaseUI.java=UTF-8
+encoding//src/eightqueens/ui/CoreUI.java=UTF-8
+encoding//src/eightqueens/ui/HumanUI.java=UTF-8
+encoding//src/eightqueens/ui/TestUI.java=UTF-8
+encoding//src/eightqueens/ui/WelcomeUI.java=UTF-8
+encoding//src/eightqueens/ui/panel/BaseBoard.java=UTF-8
+encoding//src/eightqueens/ui/panel/Board.java=UTF-8

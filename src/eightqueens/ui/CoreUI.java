@@ -1,16 +1,19 @@
-package eightqueens.GUI;
+package eightqueens.ui;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import eightqueens.algorithm.AlgorithmPolling;
 import eightqueens.algorithm.NonRecursiveBacktracking;
 import eightqueens.algorithm.RecursiveBacktracking;
+import eightqueens.ui.panel.Board;
 import eightqueens.util.Position;
 
 @SuppressWarnings("serial")
-public class MainUI extends JFrame {
+public class CoreUI extends JFrame {
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 700;
 	
@@ -22,14 +25,15 @@ public class MainUI extends JFrame {
 
     private String letter[] = new String[numberOfQueens];
 	
-	public MainUI() {
+	public CoreUI() {
 		// TODO Auto-generated constructor stub
 		initUI();
 		initComponents();
 		initActions();
 //		initData();
-        polling = new AlgorithmPolling(this);
+        polling = new AlgorithmPolling(this); 
         board.setPolling(polling);
+        
 	}
 	
 	private void initData() {
@@ -77,10 +81,10 @@ public class MainUI extends JFrame {
 
     private void stopAlgorithm(){
         if (polling.isSolving()){
-            board.setInspectionCell(null, false);
             nonRecursiveBacktracking.terminate();
             toggleComponents(true);
             polling.init();
+            board.setInspectionCell(null, false);
         }
     }
 
@@ -97,13 +101,13 @@ public class MainUI extends JFrame {
     private void togglePause(){
         if (polling.paused()){
             polling.resumeSolving();
-            btnPause.setText("Pause");
+            btnPause.setText("Tạm ngưng");
             synchronized (nonRecursiveBacktracking){
                 nonRecursiveBacktracking.notify();
             }
         } else {
             polling.pauseSolving();
-            btnPause.setText("Resume");
+            btnPause.setText("Tiếp tục");
         }
     }
 
@@ -117,7 +121,7 @@ public class MainUI extends JFrame {
         if (valid) {
         	lblColSolution[row].setText(letter[col]);
         } else {
-        	lblColSolution[row].setText("NA");
+        	lblColSolution[row].setText("");
         }
     }
 
@@ -160,7 +164,7 @@ public class MainUI extends JFrame {
 		this.setSize(WIDTH, HEIGHT);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
-		this.setTitle("Eight Queens Problem");
+		this.setTitle("Phần m�?m giải bài toán 8 quân hậu");
 		this.setResizable(false);
 		getContentPane().setLayout(null);
 	}
@@ -196,7 +200,7 @@ public class MainUI extends JFrame {
 		cboNumber.setSelectedIndex(5);
 		pnControl.add(cboNumber);
 
-		JLabel lblDelay = new JLabel("Delay/cell");
+		JLabel lblDelay = new JLabel("Tốc độ");
 		lblDelay.setBounds(10, 40, controlWidth, controlHeight);
 		pnControl.add(lblDelay);
 		tfDelay = new JTextField();
@@ -207,38 +211,38 @@ public class MainUI extends JFrame {
         /**
          * Split 2 cols
          */
-		btnSolve = new JButton("Run");
+		btnSolve = new JButton("Bắt đầu");
 		changeButtonAppearance(btnSolve);
 		btnSolve.setBounds(10, 80, controlWidth, controlHeight);
         pnControl.add(btnSolve);
 
-		btnClearBoard = new JButton("Clear");
+		btnClearBoard = new JButton("Làm mới");
         changeButtonAppearance(btnClearBoard);
 		btnClearBoard.setBounds(115, 80, controlWidth, controlHeight);
         pnControl.add(btnClearBoard);
 
-		btnStop = new JButton("Stop");
+		btnStop = new JButton("Dừng");
         changeButtonAppearance(btnStop);
 		btnStop.setBounds(10, 115, controlWidth, controlHeight);
         pnControl.add(btnStop);
 
-        btnPause = new JButton("Pause");
+        btnPause = new JButton("Tạm ngưng");
         changeButtonAppearance(btnPause);
         btnPause.setBounds(115, 115, controlWidth, controlHeight);
         pnControl.add(btnPause);
 
-		btnNextSolution = new JButton("Go next");
+		btnNextSolution = new JButton("Tiếp");
 		changeButtonAppearance(btnNextSolution);
 		btnNextSolution.setBounds(10, 150, controlWidth, controlHeight);
 		pnControl.add(btnNextSolution);
     }
 
 	private void changeButtonAppearance(JButton btn){
-	    btn.setOpaque(true);
-	    btn.setForeground(Color.white);
-	    btn.setBackground(btnColor);
-	    btn.setBorderPainted(false);
-	    btn.setFocusPainted(false);
+//	    btn.setOpaque(true);
+//	    btn.setForeground(Color.white);
+//	    btn.setBackground(btnColor);
+//	    btn.setBorderPainted(false);
+//	    btn.setFocusPainted(false);
     }
 
     private void initPanelBoardState(){
@@ -248,11 +252,11 @@ public class MainUI extends JFrame {
         pnBoardState.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         getContentPane().add(pnBoardState);
 
-        lblRow = new JLabel("Current row: ");
+        lblRow = new JLabel("Duyệt dòng: ");
         lblRow.setBounds(10, 5, 120, 25);
         pnBoardState.add(lblRow);
 
-        lblCol = new JLabel("Current col: ");
+        lblCol = new JLabel("Duyệt cột: ");
         lblCol.setBounds(10, 35, 120, 25);
         pnBoardState.add(lblCol);
 
@@ -294,7 +298,7 @@ public class MainUI extends JFrame {
     	    lblRowSolution[i].setHorizontalAlignment(JLabel.CENTER);
     	    pnSolution.add(lblRowSolution[i]);
     	    
-    	    lblColSolution[i] = new JLabel("NA");	
+    	    lblColSolution[i] = new JLabel("");	
     	    lblColSolution[i].setHorizontalAlignment(JLabel.CENTER);
     	    lblColSolution[i].setFont(new Font("Consolas", Font.PLAIN, 20));
     	    lblColSolution[i].setBorder(BorderFactory.createLineBorder(Color.BLACK));
@@ -362,6 +366,6 @@ public class MainUI extends JFrame {
 	}
 
 	public static void main(String[] args) {
-		new MainUI().setVisible(true);
+		new CoreUI().setVisible(true);
 	}
 }

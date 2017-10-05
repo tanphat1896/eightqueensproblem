@@ -1,8 +1,8 @@
 package eightqueens.algorithm;
 
-import eightqueens.GUI.Board;
-
 import javax.swing.*;
+
+import eightqueens.ui.panel.Board;
 
 public class NonRecursiveBacktracking extends Thread {
     private Board board;
@@ -66,7 +66,9 @@ public class NonRecursiveBacktracking extends Thread {
                 if (row >= N){
                     polling.pauseSolving();
                     checkingPause();
-                    revertLastValidColumn(col);
+                    if (polling.isSolving()) {
+                        revertLastValidColumn(col);
+                    }
                     continue;
                 }
                 startCol = -1;

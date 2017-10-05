@@ -1,6 +1,6 @@
 package eightqueens.algorithm;
 
-import eightqueens.GUI.Board;
+import eightqueens.ui.panel.Board;
 
 public class RecursiveBacktracking extends Thread{
     private Board board;

@@ -1,4 +1,4 @@
-package eightqueens.GUI;
+package eightqueens.ui.panel;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -60,6 +60,7 @@ public class Board extends JPanel {
 		initUI();
 		initAction();
 		initData();
+		
 	}
 
 	private void initUI() {
@@ -250,8 +251,8 @@ public class Board extends JPanel {
 			g.drawLine(0, i * sizeOfCell, boardBoundary, i * sizeOfCell);
 			g.drawLine(i * sizeOfCell, 0, i * sizeOfCell, boardBoundary);
 		}
-		g.drawLine(boardBoundary + 1, 0, boardBoundary + 1, boardBoundary + 1);
-		g.drawLine(0, boardBoundary + 1, boardBoundary + 1, boardBoundary + 1);
+		g.drawLine(boardBoundary, 0, boardBoundary, boardBoundary);
+		g.drawLine(0, boardBoundary, boardBoundary, boardBoundary);
 	}
 
 	private void drawBackground(Graphics g) {
@@ -293,7 +294,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	private void drawImage(Graphics g, Point p, Image img) {
+	protected void drawImage(Graphics g, Point p, Image img) {
 		g.drawImage(img, p.x + 1, p.y + 1, null);
 	}
 

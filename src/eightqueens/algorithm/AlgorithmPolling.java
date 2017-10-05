@@ -1,13 +1,13 @@
 package eightqueens.algorithm;
 
-import eightqueens.GUI.MainUI;
+import eightqueens.ui.CoreUI;
 
 public class AlgorithmPolling extends Thread{
-    private MainUI mainUI;
+    private CoreUI mainUI;
     private boolean isSolving = false;
     private boolean paused = false;
 
-    public AlgorithmPolling(MainUI mainUI){
+    public AlgorithmPolling(CoreUI mainUI){
         this.mainUI = mainUI;
     }
 
