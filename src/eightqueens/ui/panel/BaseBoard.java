@@ -1,12 +1,10 @@
 package eightqueens.ui.panel;
 
 import java.awt.*;
-import java.awt.event.*;
 import java.util.*;
 
 import javax.swing.JPanel;
 
-import eightqueens.algorithm.AlgorithmPolling;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Position;
 
@@ -19,8 +17,13 @@ public class BaseBoard extends JPanel {
 	public static final int GAP = 40;
 	protected static final Color TEXT_COLOR = Color.BLACK;
 	protected static final Color LINE_COLOR = Color.GRAY;
-	protected static final Color SAFE_COLOR = new Color(0, 200, 0);
-	protected static final Color BG_COLOR = new Color(0, 128, 192);
+	
+	protected Color safeCellColor = new Color(145, 216, 145);
+	
+	protected Color bgColor = new Color(0, 128, 192);
+	protected boolean useColorBg = false;
+	
+	
 
 	/**
 	 * Board data
@@ -30,6 +33,7 @@ public class BaseBoard extends JPanel {
 	protected int numberOfQueens = 8;
 	protected boolean[][] painted;
 	protected int[] placedQueens;
+	protected boolean isHintSafeCell = false;
 
 	/**
 	 * Queens movement
@@ -50,6 +54,7 @@ public class BaseBoard extends JPanel {
 	}
 
 	private void initUI() {
+		this.setLayout(null);
 		this.setSize(EDGE_SIZE + GAP, EDGE_SIZE + GAP);
 	}
 
@@ -57,6 +62,13 @@ public class BaseBoard extends JPanel {
 		this.numberOfQueens = numOfQueen;
 		initData();
 		this.repaint();
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		drawBoard(g);
+		putPlacedQueens(g);
+        drawInspectionCell(g);
 	}
 
 	/**
@@ -115,17 +127,10 @@ public class BaseBoard extends JPanel {
 	/**
 	 * Paint Methods
 	 */
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		drawBoard(g);
-		putPlacedQueens(g);
-        drawInspectionCell(g);
-	}
 
 	private void drawBoard(Graphics g) {
 		drawGrid(g);
-		drawBackground(g, false);
-//		drawBackground(g, true);
+		drawBackground(g, useColorBg);
 		drawIndex(g);
 	}
 
@@ -163,9 +168,15 @@ public class BaseBoard extends JPanel {
 						g.drawImage(ImageUtil.darkBG, i * sizeOfCell + 1, j * sizeOfCell + 1, null);
 					// g.drawImage(ImageUtil.darkBG, i*sizeOfCell + GAP + 1, j*sizeOfCell+1, null);
 					else {
-						g.setColor(BG_COLOR);
+						g.setColor(bgColor);
 						g.fillRect(i*sizeOfCell + 1, j*sizeOfCell + 1, sizeOfCell - 1, sizeOfCell - 1);
 					}
+				} else {
+					/**
+					 * Tô thêm các ô sáng cho bàn cờ
+					 */
+//					g.setColor(BG_COLOR);
+//					g.fillRect(i*sizeOfCell + 1, j*sizeOfCell + 1, sizeOfCell - 1, sizeOfCell - 1);
 				}
 			}
 	}
@@ -262,7 +273,7 @@ public class BaseBoard extends JPanel {
 	}
 
 	private void drawSafeArea(Graphics g) {
-		g.setColor(SAFE_COLOR);
+		g.setColor(safeCellColor);
 		for (int row = 0; row < numberOfQueens; row++)
 			for (int col = 0; col < numberOfQueens; col++)
 				if (!painted[row][col] && !hasQueen(row, col))
@@ -281,7 +292,8 @@ public class BaseBoard extends JPanel {
 				continue;
 			drawImage(g, new Position(row, col).toPoint(sizeOfCell), ImageUtil.queen);
 			drawDangerArea(g);
-			drawSafeArea(g);
+			if (isHintSafeCell)
+				drawSafeArea(g);
 		}
 	}
 
@@ -308,5 +320,21 @@ public class BaseBoard extends JPanel {
 
 	public int getSizeOfCell() {
 		return sizeOfCell;
+	}
+	
+	public void setUseColorBg(boolean useColorBg) {
+		this.useColorBg = useColorBg;
+	}
+	
+	public void setBgColor(Color bgColor) {
+		this.bgColor = bgColor;
+	}
+	
+	public void setHintSafeCell(boolean isHintSafeCell) {
+		this.isHintSafeCell = isHintSafeCell;
+	}
+	
+	public void setSafeCellColor(Color safeCellColor) {
+		this.safeCellColor = safeCellColor;
 	}
 }

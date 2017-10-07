@@ -1,18 +1,11 @@
 package eightqueens.ui;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
-import eightqueens.algorithm.AlgorithmPolling;
-import eightqueens.algorithm.NonRecursiveBacktracking;
-import eightqueens.algorithm.PureBacktracking;
-import eightqueens.algorithm.RecursiveBacktracking;
-import eightqueens.ui.panel.Board;
-import eightqueens.util.Position;
+import eightqueens.util.ImageUtil;
 import eightqueens.util.Result;
+import eightqueens.util.Util;
 
 import javax.swing.border.TitledBorder;
 
@@ -33,7 +26,7 @@ public class BaseUI extends JFrame {
 		initData();
 	}
 	
-	private void initData() {
+	protected void initData() {
 		letter = new String[numberOfQueens];
         for (int i = 0; i < numberOfQueens; i++)
         	letter[i] = (char)(65 + i) + "";
@@ -44,30 +37,42 @@ public class BaseUI extends JFrame {
 	/**
 	 * Components
 	 */
+	protected JLabel lblTitleGame;
+	
 //	private Board board;
-	private JPanel pnBoard;
+	protected JPanel pnBoard;
 	protected JComboBox<Integer> cboNumber;
 
-    private JPanel pnBoardState;
-    private JLabel lblRow, lblCol;
+	protected JPanel pnInspectQueen;
+	protected JLabel lblRow, lblCol;
     protected JLabel lblRowVal, lblColVal;
 
-    private JPanel pnSolution;
+    protected JPanel pnSolution;
     protected JLabel lblRowSolution[];
     protected JLabel lblColSolution[];
     protected int labelSolutionSize = 30;
+    
+    protected JPanel pnBoardCustomization;
+    protected JButton btnBgWood;
+    protected JButton btnBgBlue;
+    protected JButton btnBgGreen;
+    protected JButton btnCustomBg;
+    protected JButton btnBasicQueen;
+    protected JButton btnFlatQueen;
+    protected JButton btnAeroQueen;
+    
+    protected JCheckBox cbShowSafeCell;
+    protected JLabel lblColorSafeCell;
 
     /**
      * Measurement
      */
     public static final int CONTROL_WIDTH = 100;
     public static final int CONTROL_HEIGHT = 25;
-    private Color colorBtn = new Color(43, 87, 154);
-//    private Color btnColor = new Color(0, 131, 235);
-//    private Color btnColor = new Color(105, 183, 0);
+    protected Color colorBtn = new Color(43, 87, 154);
     
-    private static final Color FG_SUCCESS = new Color(0, 255, 0);
-    private static final Color FG_DANGER = new Color(200, 0, 0);
+    protected static final Color FG_SUCCESS = new Color(0, 200, 0);
+    protected static final Color FG_DANGER = new Color(255, 0, 0);
 
 	/**
 	 * Init GUI
@@ -85,20 +90,88 @@ public class BaseUI extends JFrame {
 //		board = new Board();
 //		board.setBounds(5, 5, board.getWidth(), board.getHeight());
 //		getContentPane().add(board);
-		initPanelControl();
-        initPanelBoardState();
+		
+		lblTitleGame = new JLabel("Giải bài toán Tám quân hậu");
+		lblTitleGame.setForeground(SystemColor.textHighlight);
+		lblTitleGame.setHorizontalAlignment(JLabel.CENTER);
+		lblTitleGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblTitleGame.setBounds(10, 10, 775, 34);
+		getContentPane().add(lblTitleGame);
+		
+		initPanelBoardCustomization();
+		initPanelBoardData();
+        initPanelInspectQueen();
         initPanelSolution();
     }
+	
+	private void initPanelBoardCustomization() {
+		pnBoardCustomization = new JPanel(null);
+		pnBoardCustomization.setBorder(new TitledBorder(null, "Tùy biến", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		pnBoardCustomization.setBounds(550, 55, 234, 178);
+		
+		JLabel lblColor = new JLabel("Màu nền");
+		lblColor.setBounds(10, 22, 100, 15);
+		pnBoardCustomization.add(lblColor);
+		
+		btnBgWood = new JButton(new ImageIcon(Util.getResource(Util.IMAGE_FOLDER + "wood_bg.png")));
+		btnBgBlue = new JButton(new ImageIcon(Util.getResource(Util.IMAGE_FOLDER + "blue_bg.png")));
+		btnBgGreen = new JButton(new ImageIcon(Util.getResource(Util.IMAGE_FOLDER + "green_bg.png")));
+		btnCustomBg = new JButton("Chọn màu");
+		btnCustomBg.setContentAreaFilled(false);
+		btnCustomBg.setOpaque(false);
+		btnBgWood.setBounds(10, 42, 25, 25);
+		btnBgBlue.setBounds(47, 42, 25, 25);
+		btnBgGreen.setBounds(84, 42, 25, 25);
+		btnCustomBg.setBounds(121, 42, 91, 25);
+		pnBoardCustomization.add(btnBgWood);
+		pnBoardCustomization.add(btnBgBlue);
+		pnBoardCustomization.add(btnBgGreen);
+		pnBoardCustomization.add(btnCustomBg);
+		
+		
+		JLabel lblQueen = new JLabel("Kiểu quân hậu");
+		lblQueen.setBounds(10, 79, 100, 15);
+		pnBoardCustomization.add(lblQueen);
+		
+		btnFlatQueen = new JButton(ImageUtil.getImageIconWithSize("flat_queen.png", 30));
+		btnFlatQueen.setContentAreaFilled(false);
+		btnFlatQueen.setOpaque(false);
+		btnAeroQueen = new JButton(ImageUtil.getImageIconWithSize("aero_queen.png", 30));
+		btnAeroQueen.setOpaque(false);
+		btnAeroQueen.setContentAreaFilled(false);
+		btnBasicQueen = new JButton(ImageUtil.getImageIconWithSize("basic_queen.png", 30));
+		btnBasicQueen.setOpaque(false);
+		btnBasicQueen.setContentAreaFilled(false);
+		btnBasicQueen.setBounds(10, 99, 30, 30);
+		btnFlatQueen.setBounds(52, 99, 30, 30);
+		btnAeroQueen.setBounds(94, 99, 30, 30);
+		pnBoardCustomization.add(btnBasicQueen);
+		pnBoardCustomization.add(btnFlatQueen);
+		pnBoardCustomization.add(btnAeroQueen);
+		
+		cbShowSafeCell = new JCheckBox("Tô màu các ô an toàn");
+		cbShowSafeCell.setBounds(10, 142, 151, 20);
+		lblColorSafeCell = new JLabel();
+		lblColorSafeCell.setEnabled(false);
+		lblColorSafeCell.setBackground(new Color(145, 216, 145));
+		lblColorSafeCell.setOpaque(true);
+		lblColorSafeCell.setBounds(163, 140, 25, 25);
+		pnBoardCustomization.add(lblColorSafeCell);
+		pnBoardCustomization.add(cbShowSafeCell);
+		
+		
+		getContentPane().add(pnBoardCustomization);
+	}
 
-    private void initPanelControl() {
+    private void initPanelBoardData() {
         pnBoard = new JPanel();
         pnBoard.setLayout(null);
-        pnBoard.setBounds(550, 5, 230, 91);
+        pnBoard.setBounds(550, 245, 230, 90);
         pnBoard.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "B\u00E0n c\u1EDD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         getContentPane().add(pnBoard);
 
         JLabel lblNum = new JLabel("Chọn số quân hậu");
-        lblNum.setBounds(12, 26, 206, 16);
+        lblNum.setBounds(12, 27, 206, 16);
         pnBoard.add(lblNum);
     	cboNumber = new JComboBox<>();
 		cboNumber.setAutoscrolls(true);
@@ -112,6 +185,7 @@ public class BaseUI extends JFrame {
 		pnBoard.add(cboNumber);
     }
 
+    @SuppressWarnings("unused")
 	private void changeButtonAppearance(JButton btn){
 //	    btn.setOpaque(true);
 //	    btn.setForeground(Color.white);
@@ -120,36 +194,36 @@ public class BaseUI extends JFrame {
 //	    btn.setFocusPainted(false);
     }
 
-    private void initPanelBoardState(){
-        pnBoardState = new JPanel();
-        pnBoardState.setLayout(null);
-        pnBoardState.setBounds(550, 200, 230, 200);
-        pnBoardState.setBorder(BorderFactory.createLineBorder(Color.GRAY));
-        getContentPane().add(pnBoardState);
+    private void initPanelInspectQueen(){
+        pnInspectQueen = new JPanel();
+        pnInspectQueen.setLayout(null);
+        pnInspectQueen.setBounds(550, 474, 230, 74);
+        pnInspectQueen.setBorder(BorderFactory.createLineBorder(Color.GRAY));
+        getContentPane().add(pnInspectQueen);
 
         lblRow = new JLabel("Duyá»‡t dÃ²ng: ");
         lblRow.setBounds(10, 5, 120, 25);
-        pnBoardState.add(lblRow);
+        pnInspectQueen.add(lblRow);
 
         lblCol = new JLabel("Duyá»‡t cá»™t: ");
         lblCol.setBounds(10, 35, 120, 25);
-        pnBoardState.add(lblCol);
+        pnInspectQueen.add(lblCol);
 
         lblRowVal = new JLabel("0");
         lblRowVal.setFont(new Font("Segoe UI", Font.PLAIN, 17));
         lblRowVal.setBounds(130, 5, 20, 25);
-        pnBoardState.add(lblRowVal);
+        pnInspectQueen.add(lblRowVal);
 
         lblColVal = new JLabel("0");
         lblColVal.setFont(new Font("Segoe UI", Font.PLAIN, 17));
         lblColVal.setBounds(130, 35, 20, 25);
-        pnBoardState.add(lblColVal);        
+        pnInspectQueen.add(lblColVal);        
     }
 
     private void initPanelSolution(){
         pnSolution = new JPanel();
         pnSolution.setLayout(null);
-        pnSolution.setBounds(20,  540, 775, 100);
+        pnSolution.setBounds(10,  576, 775, 84);
         getContentPane().add(pnSolution);
 
         initLabelState();
@@ -182,6 +256,7 @@ public class BaseUI extends JFrame {
         }
     	pnSolution.revalidate();
     	pnSolution.repaint();
+    	System.out.println(lblColSolution.length);
     }
     
     public void changeLabelSolutionAppearance(Result result) {
@@ -189,11 +264,16 @@ public class BaseUI extends JFrame {
     		for (JLabel jLabel : lblColSolution) {
 				jLabel.setForeground(FG_SUCCESS);
 			}
-    	} else {
-    		for (JLabel jLabel : lblColSolution) {
-				jLabel.setForeground(FG_DANGER);
-			}
-    	}
+    	} else 
+    		if (result == Result.FAILED) {
+    			for (JLabel jLabel : lblColSolution) {
+    				jLabel.setForeground(FG_DANGER);
+    			}
+    		} else {
+    			for (JLabel jLabel : lblColSolution) {
+    				jLabel.setForeground(Color.black);
+    			}
+    		}
     }
 
     /**

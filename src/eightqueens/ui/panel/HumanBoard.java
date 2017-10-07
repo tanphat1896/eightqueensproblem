@@ -1,10 +1,13 @@
 package eightqueens.ui.panel;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+
+import javax.swing.JLabel;
 
 import eightqueens.ui.HumanUI;
 import eightqueens.util.ImageUtil;
@@ -14,6 +17,9 @@ import eightqueens.util.Result;
 @SuppressWarnings("serial")
 public class HumanBoard extends BaseBoard {
 	private HumanUI hmUI;
+	
+	private boolean isRemoving = false;
+	
 	/**
 	 * Movement
 	 */
@@ -22,16 +28,27 @@ public class HumanBoard extends BaseBoard {
 	private Point draggingPoint;
 	private int distanceX;
 	private int distanceY;
+	
+	/**
+	 * UI Component
+	 * @param hmUI
+	 */
+	private JLabel lblRemoveQueen = new JLabel("Kéo quân hậu ra khỏi bàn cờ để xóa nó!");
 
+	/**
+	 * @wbp.parser.constructor
+	 */
 	public HumanBoard(HumanUI hmUI) {
 		super();
 		this.hmUI = hmUI;
+		initLabelRemoveQueen();
 		initAction();
 	}
 
 	public HumanBoard(HumanUI hmUI, int totalQueen) {
 		super(totalQueen);
 		this.hmUI = hmUI;
+		initLabelRemoveQueen();
 		initAction();
 	}
 
@@ -98,8 +115,10 @@ public class HumanBoard extends BaseBoard {
 		checkDangerCell();
 		if (allQueensPlaced())
 			hmUI.notifyFinish(Result.FOUND);
-		if (noSafeCellLeft() && !allQueensPlaced())
+		else if (noSafeCellLeft())
 			hmUI.notifyFinish(Result.FAILED);
+		else hmUI.notifyFinish(Result.NOTFOUND);
+		
 	}
 
 	public void paintComponent(Graphics g) {
@@ -113,6 +132,7 @@ public class HumanBoard extends BaseBoard {
 	}
 
 	private void clearDragging() {
+		lblRemoveQueen.setVisible(false);
 		oldPos = null;
 		distanceX = distanceY = 0;
 		isDragging = false;
@@ -125,12 +145,17 @@ public class HumanBoard extends BaseBoard {
 		if (p.getX() >= boardBoundary || p.getY() >= boardBoundary)
 			return;
 		Position pos = new Position(p, sizeOfCell);
+		if (isRemoving) {
+			handleRemoveQueen(pos);
+			return;
+		}
 		if (!hasQueen(pos)) {
 			if (!isSafe(pos))
 				return;
 			placeQueen(pos);
 			hmUI.updateCurrentBoardStateInUI(pos.getRow(), pos.getCol(), true);
 		} else {
+			lblRemoveQueen.setVisible(true);
 			oldPos = pos;
 			calculateDistance(pos.toPoint(sizeOfCell), p);
 			removeQueen(pos);
@@ -142,11 +167,24 @@ public class HumanBoard extends BaseBoard {
 		repaint();
 		checkFinish();
 	}
+	
+	private void handleRemoveQueen(Position pos) {
+		if (!hasQueen(pos)) 
+			return;
+		removeQueen(pos);
+		repaint();
+	}
 
 	private void handleMouseReleased(Point p) {
 		if (!isDragging)
 			return;
-		if (p.getX() < boardBoundary && p.getY() < boardBoundary) {
+		releaseDraggingQueen(p);
+		repaint();
+		checkFinish();
+	}
+	
+	private void releaseDraggingQueen(Point p) {
+		if (p.getX() < boardBoundary && p.getY() < boardBoundary && p.getX() >= 0 && p.getY() >= 0) {
 			Position pos = new Position(p, sizeOfCell);
 			if (isSafe(pos)) {
 				placeQueen(pos);
@@ -155,13 +193,16 @@ public class HumanBoard extends BaseBoard {
 				placeQueen(oldPos);
 				hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
 			}
-		} else {
-			placeQueen(oldPos);
-			hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
-		}
+		} 
+		
+		/**
+		 * Thay vì đặt về ô cũ, kéo ra khỏi biên == xóa quân cờ đó
+		 */
+//		else {
+//			placeQueen(oldPos);
+//			hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
+//		}
 		clearDragging();
-		repaint();
-		checkFinish();
 	}
 
 	private void handleMouseDragged(Point p) {
@@ -171,6 +212,14 @@ public class HumanBoard extends BaseBoard {
 		repaint();
 	}
 
+	private void initLabelRemoveQueen() {
+		lblRemoveQueen.setVisible(false);
+		lblRemoveQueen.setHorizontalAlignment(JLabel.CENTER);
+		lblRemoveQueen.setForeground(Color.RED);
+		lblRemoveQueen.setBounds(10, 524, 520, 16);
+		this.add(lblRemoveQueen);
+	}
+	
 	private void initAction() {
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -203,5 +252,13 @@ public class HumanBoard extends BaseBoard {
 		if (!isDragging)
 			return;
 		super.drawImage(g, draggingPoint, ImageUtil.queen);
+	}
+	
+	/**
+	 * Setter & getter
+	 */
+	
+	public void setRemoving(boolean isRemoving) {
+		this.isRemoving = isRemoving;
 	}
 }

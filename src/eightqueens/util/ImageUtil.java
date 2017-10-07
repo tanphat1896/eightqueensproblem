@@ -13,17 +13,31 @@ public class ImageUtil {
 	public static Image danger;
 	public static Image ok;
 	public static Image poll;
+	public static int size;
 	
 	public static void initImage(int size) {
-		darkBG = getScaledImage("dark_background.png", size);
-		queen = getScaledImage("queen.png", size);
+		ImageUtil.size = size;
+		darkBG = getScaledImage("wood_bg.png", size);
+		queen = getScaledImage("basic_queen.png", size);
 		danger = getScaledImage("x.png", size);
 		ok = getScaledImage("ok.png", size);
 		poll = getScaledImage("poll.png", size);
 	}
 	
+	public static void reinitBackground(String color) {
+		darkBG = getScaledImage(color + "_bg.png", size);
+	}
+	
+	public static void reinitQueen(String type) {
+		queen = getScaledImage(type + "_queen.png", size);
+	}
+	
 	public static ImageIcon getImageIcon(String name) {
 		return new ImageIcon(Util.getResource(Util.IMAGE_FOLDER + name));
+	}
+	
+	public static ImageIcon getImageIconWithSize(String name, int size) {
+		return new ImageIcon(getScaledImage(name, size));
 	}
 	
 	public static Image getScaledImage(String name, int size) {
