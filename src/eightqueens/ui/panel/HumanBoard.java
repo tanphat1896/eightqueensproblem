@@ -13,6 +13,7 @@ import eightqueens.ui.HumanUI;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Position;
 import eightqueens.util.Result;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class HumanBoard extends BaseBoard {
@@ -213,10 +214,11 @@ public class HumanBoard extends BaseBoard {
 	}
 
 	private void initLabelRemoveQueen() {
+		lblRemoveQueen.setFont(new Font("Dialog", Font.BOLD, 14));
 		lblRemoveQueen.setVisible(false);
 		lblRemoveQueen.setHorizontalAlignment(JLabel.CENTER);
 		lblRemoveQueen.setForeground(Color.RED);
-		lblRemoveQueen.setBounds(10, 524, 520, 16);
+		lblRemoveQueen.setBounds(10, 520, 520, 20);
 		this.add(lblRemoveQueen);
 	}
 	
@@ -260,5 +262,11 @@ public class HumanBoard extends BaseBoard {
 	
 	public void setRemoving(boolean isRemoving) {
 		this.isRemoving = isRemoving;
+	}
+	
+	public void setPlacedQueens(int[] placedQueens) {
+		this.placedQueens = placedQueens;
+		for (int i = 0; i < numberOfQueens; i++)
+			hmUI.updateCurrentBoardStateInUI(i, placedQueens[i], true);
 	}
 }

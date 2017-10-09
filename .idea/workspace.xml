@@ -2,11 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d78e4bc4-f57f-47c8-a2a5-73cb14712d74" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resource/image/ok.png" afterPath="$PROJECT_DIR$/src/resource/image/ok.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resource/image/blue_bg.png" afterPath="$PROJECT_DIR$/src/resource/image/blue_bg.png" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/resource/image/green_bg.PNG" afterPath="$PROJECT_DIR$/src/resource/image/green_bg.PNG" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/GUI/Board.java" afterPath="$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" afterPath="$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java" afterPath="$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java" afterPath="$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/ui/BaseUI.java" afterPath="$PROJECT_DIR$/src/eightqueens/ui/BaseUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/ui/ComputerUI.java" afterPath="$PROJECT_DIR$/src/eightqueens/ui/ComputerUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/ui/HumanUI.java" afterPath="$PROJECT_DIR$/src/eightqueens/ui/HumanUI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/ui/panel/BaseBoard.java" afterPath="$PROJECT_DIR$/src/eightqueens/ui/panel/BaseBoard.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/eightqueens/ui/panel/HumanBoard.java" afterPath="$PROJECT_DIR$/src/eightqueens/ui/panel/HumanBoard.java" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,56 +21,44 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
+    <leaf>
+      <file leaf-file-name="HumanUI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/eightqueens/ui/HumanUI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="202">
-              <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
+            <state relative-caret-position="85">
+              <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
               <folding>
-                <element signature="e#236#263#0" expanded="true" />
-                <element signature="e#2007#2176#0" expanded="true" />
-                <element signature="e#2175#2176#0" expanded="true" />
+                <marker date="1507554674991" expanded="true" signature="4312:4700" ph="{...}" />
+                <marker date="1507554674991" expanded="false" signature="4425:4431" ph="}" />
+                <marker date="1507554674991" expanded="false" signature="4471:4558" ph="actionPerformed(arg0) → {" />
+                <marker date="1507554674991" expanded="false" signature="4624:4630" ph="}" />
+                <marker date="1507554674991" expanded="true" signature="4744:6145" ph="{...}" />
+                <marker date="1507554674991" expanded="false" signature="4776:4865" ph="actionPerformed(e) → { " />
+                <marker date="1507554674991" expanded="false" signature="4899:4908" ph=" }" />
+                <marker date="1507554674991" expanded="false" signature="4944:5032" ph="actionPerformed(e) → { " />
+                <marker date="1507554674991" expanded="false" signature="5066:5075" ph=" }" />
+                <marker date="1507554674991" expanded="false" signature="5112:5200" ph="actionPerformed(e) → { " />
+                <marker date="1507554674991" expanded="false" signature="5235:5244" ph=" }" />
+                <marker date="1507554674991" expanded="false" signature="5282:5369" ph="actionPerformed(e) → {" />
+                <marker date="1507554674991" expanded="false" signature="5565:5571" ph="}" />
+                <marker date="1507554674991" expanded="false" signature="5611:5694" ph="actionPerformed(e) → {" />
+                <marker date="1507554674991" expanded="false" signature="5756:5762" ph="}" />
+                <marker date="1507554674991" expanded="false" signature="5801:5884" ph="actionPerformed(e) → {" />
+                <marker date="1507554674991" expanded="false" signature="5945:5951" ph="}" />
+                <marker date="1507554674991" expanded="false" signature="5990:6073" ph="actionPerformed(e) → {" />
+                <marker date="1507554674991" expanded="false" signature="6134:6140" ph="}" />
+                <marker date="1507554674991" expanded="true" signature="6201:6294" ph="{...}" />
+                <marker date="1507554674991" expanded="true" signature="6337:7005" ph="{...}" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ImageUtil.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eightqueens/util/ImageUtil.java">
+      <file leaf-file-name="PureBacktracking.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainUI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="119" column="20" lean-forward="false" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NonRecursiveBacktracking.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="44" column="35" lean-forward="false" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlgorithmPolling.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/AlgorithmPolling.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+            <state relative-caret-position="1802">
+              <caret line="108" column="42" lean-forward="true" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="42" />
               <folding />
             </state>
           </provider>
@@ -102,12 +94,13 @@
         <option value="$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java" />
         <option value="$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
         <option value="$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
+        <option value="$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="130" />
-    <option name="y" value="5" />
+    <option name="x" value="-192" />
+    <option name="y" value="8" />
     <option name="width" value="902" />
     <option name="height" value="728" />
   </component>
@@ -129,53 +122,52 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="Scratches" />
+      <pane id="AndroidView" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="EightQueensProblem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EightQueensProblem" type="462c0819:PsiDirectoryNode" />
+              <item name="eightqueensproblem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eightqueensproblem" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="EightQueensProblem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EightQueensProblem" type="462c0819:PsiDirectoryNode" />
+              <item name="eightqueensproblem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eightqueensproblem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="EightQueensProblem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EightQueensProblem" type="462c0819:PsiDirectoryNode" />
+              <item name="eightqueensproblem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eightqueensproblem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="eightqueens" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="EightQueensProblem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EightQueensProblem" type="462c0819:PsiDirectoryNode" />
+              <item name="eightqueensproblem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eightqueensproblem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="eightqueens" type="462c0819:PsiDirectoryNode" />
               <item name="algorithm" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="EightQueensProblem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EightQueensProblem" type="462c0819:PsiDirectoryNode" />
+              <item name="eightqueensproblem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eightqueensproblem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="eightqueens" type="462c0819:PsiDirectoryNode" />
-              <item name="GUI" type="462c0819:PsiDirectoryNode" />
+              <item name="ui" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="EightQueensProblem" type="b2602c69:ProjectViewProjectNode" />
-              <item name="EightQueensProblem" type="462c0819:PsiDirectoryNode" />
+              <item name="eightqueensproblem" type="b2602c69:ProjectViewProjectNode" />
+              <item name="eightqueensproblem" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="eightqueens" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="image" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -194,7 +186,26 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.MainUI">
+  <component name="RunManager" selected="Application.HumanUI">
+    <configuration name="HumanUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="eightqueens.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="eightqueens.ui.HumanUI" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="EightQueensProblem" />
+      <envs />
+    </configuration>
     <configuration name="MainUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -203,6 +214,25 @@
         </pattern>
       </extension>
       <option name="MAIN_CLASS_NAME" value="eightqueens.GUI.MainUI" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="EightQueensProblem" />
+      <envs />
+    </configuration>
+    <configuration name="PureBacktracking" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="eightqueens.algorithm.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="eightqueens.algorithm.PureBacktracking" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -295,9 +325,16 @@
       <properties />
       <listeners />
     </configuration>
+    <list size="3">
+      <item index="0" class="java.lang.String" itemvalue="Application.MainUI" />
+      <item index="1" class="java.lang.String" itemvalue="Application.PureBacktracking" />
+      <item index="2" class="java.lang.String" itemvalue="Application.HumanUI" />
+    </list>
     <recent_temporary>
-      <list size="1">
-        <item index="0" class="java.lang.String" itemvalue="Application.MainUI" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Application.HumanUI" />
+        <item index="1" class="java.lang.String" itemvalue="Application.PureBacktracking" />
+        <item index="2" class="java.lang.String" itemvalue="Application.MainUI" />
       </list>
     </recent_temporary>
   </component>
@@ -320,30 +357,30 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3236715" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32200646" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32733223" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2193646" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19692533" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39774558" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.407767" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32852563" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -351,47 +388,79 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>89</line>
+          <properties />
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>99</line>
+          <properties />
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>100</line>
+          <properties />
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>101</line>
+          <properties />
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>102</line>
+          <properties />
+          <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>107</line>
+          <properties />
+          <option name="timeStamp" value="18" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>103</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>91</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>93</line>
+          <properties />
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>94</line>
+          <properties />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java</url>
+          <line>95</line>
+          <properties />
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="25" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/AlgorithmPolling.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/util/ImageUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1904">
-          <caret line="119" column="46" lean-forward="true" selection-start-line="119" selection-start-column="46" selection-end-line="119" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/AlgorithmPolling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="496">
@@ -408,23 +477,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/util/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -436,14 +493,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2465">
-          <caret line="152" column="0" lean-forward="false" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/AlgorithmPolling.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="527">
@@ -452,34 +502,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/util/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
           <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2280">
-          <caret line="152" column="0" lean-forward="true" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="960">
@@ -496,23 +527,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5728">
-          <caret line="388" column="5" lean-forward="false" selection-start-line="388" selection-start-column="5" selection-end-line="388" selection-end-column="5" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/util/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -532,42 +551,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2768">
-          <caret line="173" column="5" lean-forward="true" selection-start-line="173" selection-start-column="5" selection-end-line="173" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/util/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="352">
           <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1152">
-          <caret line="72" column="47" lean-forward="false" selection-start-line="72" selection-start-column="47" selection-end-line="72" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="720">
@@ -584,26 +577,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2480">
-          <caret line="155" column="40" lean-forward="true" selection-start-line="155" selection-start-column="40" selection-end-line="155" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1248">
@@ -620,26 +595,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1105">
-          <caret line="65" column="32" lean-forward="false" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1105">
@@ -656,26 +613,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1424">
-          <caret line="103" column="33" lean-forward="true" selection-start-line="103" selection-start-column="33" selection-end-line="103" selection-end-column="33" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="65" column="32" lean-forward="true" selection-start-line="65" selection-start-column="32" selection-end-line="65" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1040">
@@ -692,26 +631,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="88" column="21" lean-forward="false" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="53" column="42" lean-forward="false" selection-start-line="53" selection-start-column="42" selection-end-line="53" selection-end-column="42" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/RecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
@@ -720,38 +641,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1360">
-          <caret line="88" column="21" lean-forward="true" selection-start-line="88" selection-start-column="21" selection-end-line="88" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/Backtracking.java" />
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/RecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -763,15 +655,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eightqueens/util/ImageUtil.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="22" column="48" lean-forward="false" selection-start-line="22" selection-start-column="48" selection-end-line="22" selection-end-column="48" />
-          <folding />
+        <state relative-caret-position="73">
+          <caret line="22" column="44" lean-forward="false" selection-start-line="22" selection-start-column="44" selection-end-line="22" selection-end-column="44" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/AlgorithmPolling.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="527">
           <caret line="47" column="29" lean-forward="false" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
           <folding />
         </state>
@@ -779,29 +670,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/NonRecursiveBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
+        <state relative-caret-position="714">
           <caret line="44" column="35" lean-forward="false" selection-start-line="44" selection-start-column="35" selection-end-line="44" selection-end-column="35" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java">
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/MainUI.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java" />
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/ui/HumanUI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="26" column="13" lean-forward="false" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+          <folding>
+            <marker date="1507554674991" expanded="true" signature="4312:4700" ph="{...}" />
+            <marker date="1507554674991" expanded="false" signature="4425:4431" ph="}" />
+            <marker date="1507554674991" expanded="false" signature="4471:4558" ph="actionPerformed(arg0) → {" />
+            <marker date="1507554674991" expanded="false" signature="4624:4630" ph="}" />
+            <marker date="1507554674991" expanded="true" signature="4744:6145" ph="{...}" />
+            <marker date="1507554674991" expanded="false" signature="4776:4865" ph="actionPerformed(e) → { " />
+            <marker date="1507554674991" expanded="false" signature="4899:4908" ph=" }" />
+            <marker date="1507554674991" expanded="false" signature="4944:5032" ph="actionPerformed(e) → { " />
+            <marker date="1507554674991" expanded="false" signature="5066:5075" ph=" }" />
+            <marker date="1507554674991" expanded="false" signature="5112:5200" ph="actionPerformed(e) → { " />
+            <marker date="1507554674991" expanded="false" signature="5235:5244" ph=" }" />
+            <marker date="1507554674991" expanded="false" signature="5282:5369" ph="actionPerformed(e) → {" />
+            <marker date="1507554674991" expanded="false" signature="5565:5571" ph="}" />
+            <marker date="1507554674991" expanded="false" signature="5611:5694" ph="actionPerformed(e) → {" />
+            <marker date="1507554674991" expanded="false" signature="5756:5762" ph="}" />
+            <marker date="1507554674991" expanded="false" signature="5801:5884" ph="actionPerformed(e) → {" />
+            <marker date="1507554674991" expanded="false" signature="5945:5951" ph="}" />
+            <marker date="1507554674991" expanded="false" signature="5990:6073" ph="actionPerformed(e) → {" />
+            <marker date="1507554674991" expanded="false" signature="6134:6140" ph="}" />
+            <marker date="1507554674991" expanded="true" signature="6201:6294" ph="{...}" />
+            <marker date="1507554674991" expanded="true" signature="6337:7005" ph="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/resource/image/green_bg.PNG">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.classpath">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
-          <caret line="119" column="20" lean-forward="false" selection-start-line="119" selection-start-column="20" selection-end-line="119" selection-end-column="20" />
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/eightqueens/GUI/Board.java">
+    <entry file="file://$PROJECT_DIR$/src/eightqueens/algorithm/PureBacktracking.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="202">
-          <caret line="62" column="8" lean-forward="false" selection-start-line="62" selection-start-column="8" selection-end-line="62" selection-end-column="8" />
-          <folding>
-            <element signature="e#236#263#0" expanded="true" />
-            <element signature="e#2007#2176#0" expanded="true" />
-            <element signature="e#2175#2176#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="1802">
+          <caret line="108" column="42" lean-forward="true" selection-start-line="108" selection-start-column="42" selection-end-line="108" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>

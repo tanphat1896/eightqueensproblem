@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import eightqueens.algorithm.PureBacktracking;
 import eightqueens.ui.panel.HumanBoard;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Result;
@@ -31,10 +32,12 @@ public class HumanUI extends BaseUI {
 	
 	private JPanel pnHumanAction;
 	private JButton btnClearBoard;
-	private JButton btnRemoveQueen;
+	private JButton btnCheckPossible;
+	private JButton btnShowSolution;
 
 	public HumanUI() {
 		super();
+		pnBoard.setLocation(555, 241);
 		initBoard();
 		initComponents();
 		initAction();
@@ -67,22 +70,25 @@ public class HumanUI extends BaseUI {
 	}
 	
 	private void initComponents() {
-		pnBoard.setSize(230, 114);
+		pnBoard.setSize(230, 98);
 		
 		cbDisabledMsg = new JCheckBox();
 		cbDisabledMsg.setText("Tắt thông báo");
-		cbDisabledMsg.setBounds(12, 86, 206, 18);
+		cbDisabledMsg.setBounds(12, 73, 206, 18);
 		pnBoard.add(cbDisabledMsg);
 		
 		pnHumanAction = new JPanel(null);
 		pnHumanAction.setBorder(new TitledBorder(null, "Hành động", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnHumanAction.setBounds(550, 252, 230, 84);
+		pnHumanAction.setBounds(555, 351, 230, 127);
 		btnClearBoard = new JButton("Làm mới bàn cờ");
 		btnClearBoard.setBounds(10, 21, 134, 23);
-		btnRemoveQueen = new JButton("Xóa quân hậu");
-		btnRemoveQueen.setBounds(10, 48, 134, 23);
+		btnCheckPossible = new JButton("Kiểm tra khả thi");
+		btnCheckPossible.setBounds(10, 48, 134, 23);
+		btnShowSolution = new JButton("Hiển thị kết quả");
+		btnShowSolution.setBounds(10, 75, 134, 23);
 		pnHumanAction.add(btnClearBoard);
-		pnHumanAction.add(btnRemoveQueen);
+		pnHumanAction.add(btnCheckPossible);
+		pnHumanAction.add(btnShowSolution);
 		
 		getContentPane().add(pnHumanAction);
 	}
@@ -107,12 +113,29 @@ public class HumanUI extends BaseUI {
 			}
 		});
 		
-		btnRemoveQueen.addActionListener(new ActionListener() {
+		btnCheckPossible.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				pnHumanAction.setCursor(new Cursor(Cursor.MOVE_CURSOR));
-				hmBoard.setCursor(new Cursor(Cursor.MOVE_CURSOR));
-				hmBoard.setRemoving(true);
+//				pnHumanAction.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+//				hmBoard.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+//				hmBoard.setRemoving(true);
+				PureBacktracking pb = new PureBacktracking(numberOfQueens);
+				pb.setCompareSolution(hmBoard.getPlacedQueens());
+				if (pb.isPossibleWithSolution())
+					JOptionPane.showMessageDialog(null, "Có lời giải với cách đặt cờ này", "Khả thi", JOptionPane.INFORMATION_MESSAGE);
+				else JOptionPane.showMessageDialog(null, "Không có lời giải nào", "Không khả thi", JOptionPane.ERROR_MESSAGE);
+			}
+		});
+		
+		btnShowSolution.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PureBacktracking pb = new PureBacktracking(numberOfQueens);
+				pb.setCompareSolution(hmBoard.getPlacedQueens());
+				if (pb.isPossibleWithSolution()) {
+					hmBoard.setPlacedQueens(pb.getSolution());
+					hmBoard.repaint();
+				} else JOptionPane.showMessageDialog(null, "Không có lời giải nào", "Không khả thi", JOptionPane.ERROR_MESSAGE);
 			}
 		});
 		

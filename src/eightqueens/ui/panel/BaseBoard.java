@@ -337,4 +337,8 @@ public class BaseBoard extends JPanel {
 	public void setSafeCellColor(Color safeCellColor) {
 		this.safeCellColor = safeCellColor;
 	}
+	
+	public int[] getPlacedQueens() {
+		return placedQueens;
+	}
 }

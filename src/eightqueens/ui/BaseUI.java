@@ -94,8 +94,8 @@ public class BaseUI extends JFrame {
 		lblTitleGame = new JLabel("Giải bài toán Tám quân hậu");
 		lblTitleGame.setForeground(SystemColor.textHighlight);
 		lblTitleGame.setHorizontalAlignment(JLabel.CENTER);
-		lblTitleGame.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblTitleGame.setBounds(10, 10, 775, 34);
+		lblTitleGame.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblTitleGame.setBounds(10, 10, 775, 28);
 		getContentPane().add(lblTitleGame);
 		
 		initPanelBoardCustomization();
@@ -107,7 +107,7 @@ public class BaseUI extends JFrame {
 	private void initPanelBoardCustomization() {
 		pnBoardCustomization = new JPanel(null);
 		pnBoardCustomization.setBorder(new TitledBorder(null, "Tùy biến", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnBoardCustomization.setBounds(550, 55, 234, 178);
+		pnBoardCustomization.setBounds(555, 50, 230, 179);
 		
 		JLabel lblColor = new JLabel("Màu nền");
 		lblColor.setBounds(10, 22, 100, 15);
@@ -166,12 +166,12 @@ public class BaseUI extends JFrame {
     private void initPanelBoardData() {
         pnBoard = new JPanel();
         pnBoard.setLayout(null);
-        pnBoard.setBounds(550, 245, 230, 90);
+        pnBoard.setBounds(555, 241, 230, 90);
         pnBoard.setBorder(new TitledBorder(UIManager.getBorder("TitledBorder.border"), "B\u00E0n c\u1EDD", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
         getContentPane().add(pnBoard);
 
         JLabel lblNum = new JLabel("Chọn số quân hậu");
-        lblNum.setBounds(12, 27, 206, 16);
+        lblNum.setBounds(12, 20, 206, 16);
         pnBoard.add(lblNum);
     	cboNumber = new JComboBox<>();
 		cboNumber.setAutoscrolls(true);
@@ -180,7 +180,7 @@ public class BaseUI extends JFrame {
 			if (i != 2 && i != 3)
 				model.addElement(i);
 		cboNumber.setModel(model);
-		cboNumber.setBounds(12, 54, 206, 25);
+		cboNumber.setBounds(12, 40, 206, 25);
 		cboNumber.setSelectedIndex(5);
 		pnBoard.add(cboNumber);
     }
@@ -197,15 +197,15 @@ public class BaseUI extends JFrame {
     private void initPanelInspectQueen(){
         pnInspectQueen = new JPanel();
         pnInspectQueen.setLayout(null);
-        pnInspectQueen.setBounds(550, 474, 230, 74);
+        pnInspectQueen.setBounds(550, 490, 230, 74);
         pnInspectQueen.setBorder(BorderFactory.createLineBorder(Color.GRAY));
         getContentPane().add(pnInspectQueen);
 
-        lblRow = new JLabel("Duyá»‡t dÃ²ng: ");
+        lblRow = new JLabel("Duyệt dòng: ");
         lblRow.setBounds(10, 5, 120, 25);
         pnInspectQueen.add(lblRow);
 
-        lblCol = new JLabel("Duyá»‡t cá»™t: ");
+        lblCol = new JLabel("Duyệt cột: ");
         lblCol.setBounds(10, 35, 120, 25);
         pnInspectQueen.add(lblCol);
 
@@ -256,7 +256,7 @@ public class BaseUI extends JFrame {
         }
     	pnSolution.revalidate();
     	pnSolution.repaint();
-    	System.out.println(lblColSolution.length);
+//    	System.out.println(lblColSolution.length);
     }
     
     public void changeLabelSolutionAppearance(Result result) {
