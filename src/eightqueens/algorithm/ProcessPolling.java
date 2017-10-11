@@ -1,14 +1,14 @@
 package eightqueens.algorithm;
 
-import eightqueens.ui.CoreUI;
+import eightqueens.ui.ComputerUI;
 
-public class AlgorithmPolling extends Thread{
-    private CoreUI mainUI;
+public class ProcessPolling extends Thread{
+    private ComputerUI compUI;
     private boolean isSolving = false;
     private boolean paused = false;
 
-    public AlgorithmPolling(CoreUI mainUI){
-        this.mainUI = mainUI;
+    public ProcessPolling(ComputerUI compUI){
+        this.compUI = compUI;
     }
 
     public void init(){
@@ -29,6 +29,7 @@ public class AlgorithmPolling extends Thread{
     }
 
     public void finishSolving(){
+    	paused = true;
         isSolving = false;
     }
 
@@ -45,7 +46,15 @@ public class AlgorithmPolling extends Thread{
     }
 
     public void updateCurrentBoardState(int row, int col, boolean valid){
-        mainUI.updateCurrentBoardStateInUI(row, col, valid);
+        compUI.updateCurrentBoardStateInUI(row, col, valid);
+    }
+    
+    public void notifyFoundASolution() {
+    	compUI.notifyFoundASolution();
+    }
+    
+    public void notifyFoundAllSolution() {
+    	compUI.notifyFoundAllSolution();
     }
 
     public void test(){

@@ -5,6 +5,7 @@ import java.util.*;
 
 import javax.swing.JPanel;
 
+import eightqueens.util.Config;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Position;
 
@@ -13,7 +14,7 @@ public class BaseBoard extends JPanel {
 	/**
 	 * Board config
 	 */
-	public static final int EDGE_SIZE = 500;
+	public static final int EDGE_SIZE = 480;
 	public static final int GAP = 40;
 	protected static final Color TEXT_COLOR = Color.BLACK;
 	protected static final Color LINE_COLOR = Color.GRAY;
@@ -33,14 +34,8 @@ public class BaseBoard extends JPanel {
 	protected int numberOfQueens = 8;
 	protected boolean[][] painted;
 	protected int[] placedQueens;
+	
 	protected boolean isHintSafeCell = false;
-
-	/**
-	 * Queens movement
-	 */
-
-	private Position inspectionCell;
-	private boolean validCell;
 
 	public BaseBoard() {
 		initUI();
@@ -68,7 +63,6 @@ public class BaseBoard extends JPanel {
 		super.paintComponent(g);
 		drawBoard(g);
 		putPlacedQueens(g);
-        drawInspectionCell(g);
 	}
 
 	/**
@@ -98,7 +92,7 @@ public class BaseBoard extends JPanel {
     }
 
     public int getLastPlacedCol(){
-        int i = numberOfQueens-1;
+        int i = numberOfQueens - 1;
         while (placedQueens[i--] == -1)
             if (i < 0) break;
         return placedQueens[i+1];
@@ -122,6 +116,18 @@ public class BaseBoard extends JPanel {
 
 	protected void removeQueen(Position pos) {
 		placedQueens[pos.getRow()] = -1;
+	}
+	
+	/**
+	 * Kiểm tra xem bàn cờ có quân hậu nào không
+	 * @return boolean
+	 */
+	public boolean noQueenPlaced() {
+		for (int i = 0 ; i < numberOfQueens; i++) {
+			if (placedQueens[i] >= 0)
+				return false;
+		}
+		return true;
 	}
 
 	/**
@@ -164,11 +170,14 @@ public class BaseBoard extends JPanel {
 		for (int i = 0; i < numberOfQueens; i++)
 			for (int j = 0; j < numberOfQueens; j++) {
 				if ((i % 2 != 0 && j % 2 == 0) || (i % 2 == 0 && j % 2 != 0)) {
-					if (!withColor)
-						g.drawImage(ImageUtil.darkBG, i * sizeOfCell + 1, j * sizeOfCell + 1, null);
+					if (!withColor) {
+						Image img = (Config.boardBgImg != null) ? Config.boardBgImg: ImageUtil.darkBG;
+						g.drawImage(img, i * sizeOfCell + 1, j * sizeOfCell + 1, null);
+					}
 					// g.drawImage(ImageUtil.darkBG, i*sizeOfCell + GAP + 1, j*sizeOfCell+1, null);
 					else {
-						g.setColor(bgColor);
+						Color bg = (Config.boardBgColor != null) ? Config.boardBgColor: bgColor;
+						g.setColor(bg);
 						g.fillRect(i*sizeOfCell + 1, j*sizeOfCell + 1, sizeOfCell - 1, sizeOfCell - 1);
 					}
 				} else {
@@ -183,7 +192,7 @@ public class BaseBoard extends JPanel {
 
 	private void drawIndex(Graphics g) {
 		g.setColor(TEXT_COLOR);
-		g.setFont(new Font("Consolas", Font.PLAIN, 15));
+		g.setFont(new Font("SansSerif", Font.PLAIN, 17));
 
 		// fix ugly font
 		Map<?, ?> desktopHints = (Map<?, ?>) Toolkit.getDefaultToolkit().getDesktopProperty("awt.font.desktophints");
@@ -218,6 +227,7 @@ public class BaseBoard extends JPanel {
 	}
 
 	protected void drawImage(Graphics g, Point p, Image img) {
+		
 		g.drawImage(img, p.x + 1, p.y + 1, null);
 	}
 
@@ -234,38 +244,44 @@ public class BaseBoard extends JPanel {
 				if (!painted[i][col]) {
 					if (!hasQueen(i, col)) {
 						painted[i][col] = true;
-						drawImage(g, new Position(i, col).toPoint(sizeOfCell), ImageUtil.danger);
+						if (Config.isShowDangerCell)
+							drawImage(g, new Position(i, col).toPoint(sizeOfCell), ImageUtil.danger);
 					}
 				}
 				if (!painted[row][i]) {
 					if (!hasQueen(row, i)) {
 						painted[row][i] = true;
-						drawImage(g, new Position(row, i).toPoint(sizeOfCell), ImageUtil.danger);
+						if (Config.isShowDangerCell)
+							drawImage(g, new Position(row, i).toPoint(sizeOfCell), ImageUtil.danger);
 					}
 				}
 				if (row + i < numberOfQueens) {
 					if (col + i < numberOfQueens)
 						if (!painted[row + i][col + i] && !hasQueen(row + i, col + i)) {
 							painted[row + i][col + i] = true;
-							drawImage(g, new Position(row + i, col + i).toPoint(sizeOfCell), ImageUtil.danger);
+							if (Config.isShowDangerCell)
+								drawImage(g, new Position(row + i, col + i).toPoint(sizeOfCell), ImageUtil.danger);
 
 						}
 					if (col - i >= 0)
 						if (!painted[row + i][col - i] && !hasQueen(row + i, col - i)) {
 							painted[row + i][col - i] = true;
-							drawImage(g, new Position(row + i, col - i).toPoint(sizeOfCell), ImageUtil.danger);
+							if (Config.isShowDangerCell)
+								drawImage(g, new Position(row + i, col - i).toPoint(sizeOfCell), ImageUtil.danger);
 						}
 				}
 				if (row - i >= 0) {
 					if (col + i < numberOfQueens)
 						if (!painted[row - i][col + i] && !hasQueen(row - i, col + i)) {
 							painted[row - i][col + i] = true;
-							drawImage(g, new Position(row - i, col + i).toPoint(sizeOfCell), ImageUtil.danger);
+							if (Config.isShowDangerCell)
+								drawImage(g, new Position(row - i, col + i).toPoint(sizeOfCell), ImageUtil.danger);
 						}
 					if (col - i >= 0)
 						if (!painted[row - i][col - i] && !hasQueen(row - i, col - i)) {
 							painted[row - i][col - i] = true;
-							drawImage(g, new Position(row - i, col - i).toPoint(sizeOfCell), ImageUtil.danger);
+							if (Config.isShowDangerCell)
+								drawImage(g, new Position(row - i, col - i).toPoint(sizeOfCell), ImageUtil.danger);
 						}
 				}
 			}
@@ -290,25 +306,13 @@ public class BaseBoard extends JPanel {
 			int col = placedQueens[row];
 			if (col < 0)
 				continue;
-			drawImage(g, new Position(row, col).toPoint(sizeOfCell), ImageUtil.queen);
+			Image img = (Config.defaultQueen != null) ? Config.defaultQueen : ImageUtil.queen;
+			drawImage(g, new Position(row, col).toPoint(sizeOfCell), img);
 			drawDangerArea(g);
 			if (isHintSafeCell)
 				drawSafeArea(g);
 		}
 	}
-
-	
-	/////////////////////////////////////////////////////////////////////////////
-	private void drawInspectionCell(Graphics g){
-        if (inspectionCell != null){
-            if (inspectionCell.getRow() >= numberOfQueens || inspectionCell.getCol() >= numberOfQueens)
-                return;
-            Image drawing = validCell ? ImageUtil.ok : ImageUtil.poll;
-            Point p = inspectionCell.toPoint(sizeOfCell);
-            drawImage(g, p, drawing);
-            inspectionCell = null;
-        }
-    }
 
 	/**
 	 * Getter

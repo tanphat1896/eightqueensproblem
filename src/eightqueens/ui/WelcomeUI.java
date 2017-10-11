@@ -8,11 +8,11 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
-
+import eightqueens.util.ImageUtil;
 import eightqueens.util.Util;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class WelcomeUI extends JFrame{
@@ -26,6 +26,7 @@ public class WelcomeUI extends JFrame{
 	}
 	
 	private void initComponents() {
+		this.setIconImage(ImageUtil.getImageIcon("icon.png").getImage());
 		this.setTitle("Phần mềm giải bài toán 8 quân hậu");
 		this.setSize(600, 400);
 		this.setLocationRelativeTo(null);
@@ -48,10 +49,20 @@ public class WelcomeUI extends JFrame{
 		
 		
 		btnHuman = new JButton("Giải thủ công");
+		btnHuman.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new HumanUI().setVisible(true);
+			}
+		});
 		btnHuman.setFocusPainted(false);
 		btnHuman.setBounds(111, 251, 150, 50);
 		
 		btnComputer = new JButton("Giải tự động");
+		btnComputer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new ComputerUI().setVisible(true);
+			}
+		});
 		btnComputer.setFocusPainted(false);
 		btnComputer.setBounds(343, 251, 150, 50);
 		
@@ -63,14 +74,6 @@ public class WelcomeUI extends JFrame{
 	}
 	
 	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-			System.out.println("Windows Look and feel not support!!");
-		}
 		new WelcomeUI().setVisible(true);;
 	}
 }

@@ -37,14 +37,6 @@ public class PureBacktracking {
 		dangerDPlus = new boolean[2 * totalQueen - 1];
 	}
 
-	private void initSolution() {
-		compareSolution[3] = 2;
-		solution[3] = 2;
-		notifyDangerArea(3, 2);
-		compareSolution[1] = 3;
-		solution[1] = 3;
-		notifyDangerArea(1, 3);
-	}
 
 	private boolean canPlaceAt(int row, int col) {
 		return !dangerCol[col] && !dangerDMinus[row - col - 1 + totalQueen] && !dangerDPlus[row + col];

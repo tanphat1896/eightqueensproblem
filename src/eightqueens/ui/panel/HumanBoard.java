@@ -18,9 +18,9 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class HumanBoard extends BaseBoard {
 	private HumanUI hmUI;
-	
+
 	private boolean isRemoving = false;
-	
+
 	/**
 	 * Movement
 	 */
@@ -29,12 +29,13 @@ public class HumanBoard extends BaseBoard {
 	private Point draggingPoint;
 	private int distanceX;
 	private int distanceY;
-	
+
 	/**
 	 * UI Component
+	 * 
 	 * @param hmUI
 	 */
-	private JLabel lblRemoveQueen = new JLabel("Kéo quân hậu ra khỏi bàn cờ để xóa nó!");
+	private JLabel lblRemoveQueen;
 
 	/**
 	 * @wbp.parser.constructor
@@ -114,12 +115,16 @@ public class HumanBoard extends BaseBoard {
 
 	public void checkFinish() {
 		checkDangerCell();
-		if (allQueensPlaced())
+		if (allQueensPlaced()) {
 			hmUI.notifyFinish(Result.FOUND);
-		else if (noSafeCellLeft())
+			return;
+		}
+		if (noSafeCellLeft() && !allQueensPlaced()) {
 			hmUI.notifyFinish(Result.FAILED);
-		else hmUI.notifyFinish(Result.NOTFOUND);
-		
+			return;
+		}
+		hmUI.notifyFinish(Result.NOTFOUND);
+
 	}
 
 	public void paintComponent(Graphics g) {
@@ -151,8 +156,10 @@ public class HumanBoard extends BaseBoard {
 			return;
 		}
 		if (!hasQueen(pos)) {
-			if (!isSafe(pos))
+			if (!isSafe(pos)) {
+				hmUI.notifyPutQueenAtDangerCell();
 				return;
+			}
 			placeQueen(pos);
 			hmUI.updateCurrentBoardStateInUI(pos.getRow(), pos.getCol(), true);
 		} else {
@@ -168,12 +175,17 @@ public class HumanBoard extends BaseBoard {
 		repaint();
 		checkFinish();
 	}
-	
+
 	private void handleRemoveQueen(Position pos) {
-		if (!hasQueen(pos)) 
+		if (!hasQueen(pos))
 			return;
 		removeQueen(pos);
 		repaint();
+		hmUI.updateCurrentBoardStateInUI(pos.getRow(), pos.getCol(), false);
+		hmUI.notifyFinish(Result.NOTFOUND);
+		if (noQueenPlaced()) {
+			hmUI.stopRemoveQueen();
+		}
 	}
 
 	private void handleMouseReleased(Point p) {
@@ -183,7 +195,7 @@ public class HumanBoard extends BaseBoard {
 		repaint();
 		checkFinish();
 	}
-	
+
 	private void releaseDraggingQueen(Point p) {
 		if (p.getX() < boardBoundary && p.getY() < boardBoundary && p.getX() >= 0 && p.getY() >= 0) {
 			Position pos = new Position(p, sizeOfCell);
@@ -194,15 +206,15 @@ public class HumanBoard extends BaseBoard {
 				placeQueen(oldPos);
 				hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
 			}
-		} 
-		
+		}
+
 		/**
 		 * Thay vì đặt về ô cũ, kéo ra khỏi biên == xóa quân cờ đó
 		 */
-//		else {
-//			placeQueen(oldPos);
-//			hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
-//		}
+		// else {
+		// placeQueen(oldPos);
+		// hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
+		// }
 		clearDragging();
 	}
 
@@ -214,14 +226,15 @@ public class HumanBoard extends BaseBoard {
 	}
 
 	private void initLabelRemoveQueen() {
-		lblRemoveQueen.setFont(new Font("Dialog", Font.BOLD, 14));
+		lblRemoveQueen = new JLabel("Kéo quân hậu ra khỏi bàn cờ để xóa nó!");
+		lblRemoveQueen.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 14));
 		lblRemoveQueen.setVisible(false);
 		lblRemoveQueen.setHorizontalAlignment(JLabel.CENTER);
 		lblRemoveQueen.setForeground(Color.RED);
-		lblRemoveQueen.setBounds(10, 520, 520, 20);
+		lblRemoveQueen.setBounds(10, EDGE_SIZE + GAP - 20, 520, 20);
 		this.add(lblRemoveQueen);
 	}
-	
+
 	private void initAction() {
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
@@ -255,13 +268,17 @@ public class HumanBoard extends BaseBoard {
 			return;
 		super.drawImage(g, draggingPoint, ImageUtil.queen);
 	}
-	
+
 	/**
 	 * Setter & getter
 	 */
-	
+
 	public void setRemoving(boolean isRemoving) {
 		this.isRemoving = isRemoving;
+	}
+
+	public boolean isRemoving() {
+		return isRemoving;
 	}
 	
 	public void setPlacedQueens(int[] placedQueens) {

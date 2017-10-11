@@ -9,10 +9,11 @@ public class RecursiveBacktracking extends Thread{
     private boolean dangerDPlus[];
     private int N;
     private int stepDelay = 100;
-    private AlgorithmPolling polling;
+    @SuppressWarnings("unused")
+	private ProcessPolling polling;
     private boolean running = true;
 
-    public RecursiveBacktracking(Board board, AlgorithmPolling polling, int N) {
+    public RecursiveBacktracking(Board board, ProcessPolling polling, int N) {
         // TODO Auto-generated constructor stub
         this.board = board;
         this.polling = polling;

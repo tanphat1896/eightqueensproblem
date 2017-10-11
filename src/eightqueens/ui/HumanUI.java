@@ -1,7 +1,6 @@
 package eightqueens.ui;
 
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -9,173 +8,224 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JColorChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import eightqueens.algorithm.PureBacktracking;
+import eightqueens.ui.dialog.MyMessageDialog;
 import eightqueens.ui.panel.HumanBoard;
+import eightqueens.util.Config;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Result;
-import javax.swing.border.TitledBorder;
+import java.awt.Font;
 
 @SuppressWarnings("serial")
 public class HumanUI extends BaseUI {
 	private HumanBoard hmBoard;
-	private boolean disabledMsg = false;
-	
+
 	private JCheckBox cbDisabledMsg;
-	
-	private JPanel pnHumanAction;
+
 	private JButton btnClearBoard;
 	private JButton btnCheckPossible;
 	private JButton btnShowSolution;
+	private JButton btnRemoveQueen;
 
 	public HumanUI() {
 		super();
-		pnBoard.setLocation(555, 241);
+		lblTitleGame.setText("Tìm kiếm lời giải cho bài toán Tám quân hậu");
+		pnBoardCustomization.setLocation(555, 316);
+		cboNumber.setBounds(12, 42, 145, 25);
 		initBoard();
 		initComponents();
 		initAction();
 	}
 
-	private void initBoard() {
-		hmBoard = new HumanBoard(this);
-		hmBoard.setBounds(5, 50, hmBoard.getWidth(), hmBoard.getHeight());
-		getContentPane().add(hmBoard);
-	}
-
 	@Override
 	public void updateCurrentBoardStateInUI(int row, int col, boolean valid) {
-        lblColSolution[row].setText(valid ? letter[col] : "");
+		lblColSolution[Config.totalQueen - row - 1].setText(valid ? letter[col] : "");
 	}
-	
-	
+
 	public void notifyFinish(Result result) {
+		if (hmBoard.noQueenPlaced())
+			disableButton(btnCheckPossible);
+		else
+			enableButton(btnCheckPossible);
+
 		if (result == Result.FOUND) {
 			changeLabelSolutionAppearance(result);
-			if (!disabledMsg)
-				JOptionPane.showMessageDialog(this, "Đã tìm thấy lời giải!");
+			disableButton(btnCheckPossible);
+			if (!Config.messageDisabled)
+				MyMessageDialog.showDialog(this, "Đã tìm thấy một lời giải", "Tìm được lời giải", MyMessageDialog.SUCCESS);
 		}
+
 		if (result == Result.FAILED) {
 			changeLabelSolutionAppearance(result);
-			if (!disabledMsg)
-				JOptionPane.showMessageDialog(this, "Đã hết ô để đặt cờ, hãy thử lại!");
+			disableButton(btnCheckPossible);
+			if (!Config.messageDisabled)
+				MyMessageDialog.showDialog(this, "Hết ô an toàn để đặt, hãy thử lại", "Thất bại", MyMessageDialog.FAILED);
 		}
 		changeLabelSolutionAppearance(result);
 	}
-	
+
+	public void notifyPutQueenAtDangerCell() {
+		if (Config.isShowDangerCell)
+			return;
+		if (Config.messageDisabled)
+			return;
+		MyMessageDialog.showDialog(this, "Không được đặt cờ vào ô nguy hiểm!!!", "Thất bại", MyMessageDialog.FAILED);
+	}
+
+	private void initBoard() {
+		hmBoard = new HumanBoard(this);
+		hmBoard.setBounds(15, 55, hmBoard.getWidth(), hmBoard.getHeight());
+		getContentPane().add(hmBoard);
+	}
+
 	private void initComponents() {
-		pnBoard.setSize(230, 98);
-		
-		cbDisabledMsg = new JCheckBox();
-		cbDisabledMsg.setText("Tắt thông báo");
-		cbDisabledMsg.setBounds(12, 73, 206, 18);
-		pnBoard.add(cbDisabledMsg);
-		
-		pnHumanAction = new JPanel(null);
-		pnHumanAction.setBorder(new TitledBorder(null, "Hành động", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		pnHumanAction.setBounds(555, 351, 230, 127);
+		pnBoardOperation.setLocation(555, 50);
+		pnBoardOperation.setSize(230, 254);
+
 		btnClearBoard = new JButton("Làm mới bàn cờ");
-		btnClearBoard.setBounds(10, 21, 134, 23);
+		changeButtonAppearance(btnClearBoard, btnBG, btnFG);
+		btnClearBoard.setBounds(12, 75, 145, 25);
+
 		btnCheckPossible = new JButton("Kiểm tra khả thi");
-		btnCheckPossible.setBounds(10, 48, 134, 23);
+		changeButtonAppearance(btnCheckPossible, btnBG, btnFG);
+		btnCheckPossible.setBounds(12, 106, 145, 25);
+		disableButton(btnCheckPossible);
+
 		btnShowSolution = new JButton("Hiển thị kết quả");
-		btnShowSolution.setBounds(10, 75, 134, 23);
-		pnHumanAction.add(btnClearBoard);
-		pnHumanAction.add(btnCheckPossible);
-		pnHumanAction.add(btnShowSolution);
-		
-		getContentPane().add(pnHumanAction);
+		changeButtonAppearance(btnShowSolution, btnBG, btnFG);
+		btnShowSolution.setBounds(12, 137, 145, 25);
+
+		btnRemoveQueen = new JButton("Xóa nhiều quân hậu");
+		changeButtonAppearance(btnRemoveQueen, btnBG, btnFG);
+		btnRemoveQueen.setBounds(12, 168, 145, 25);
+
+		JLabel lblTip = new JLabel(
+				"<html>Ghi chú: Xóa nhanh các quân hậu <br>bằng cách kéo thả chúng ra khỏi bàn cờ.</html>");
+		lblTip.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+		lblTip.setBounds(12, 200, 206, 42);
+
+		pnBoardOperation.add(btnClearBoard);
+		pnBoardOperation.add(btnCheckPossible);
+		pnBoardOperation.add(btnShowSolution);
+		pnBoardOperation.add(btnRemoveQueen);
+		pnBoardOperation.add(lblTip);
+
+		cbDisabledMsg = new JCheckBox();
+		cbDisabledMsg.setFont(COMMON_FONT);
+		cbDisabledMsg.setBounds(10, 197, 189, 18);
+		pnBoardCustomization.add(cbDisabledMsg);
+		cbDisabledMsg.setText("Tắt hết thông báo");
 	}
 
 	private void initAction() {
 		cboNumber.addItemListener(new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				numberOfQueens = Integer.parseInt(e.getItem().toString());
-				hmBoard.reinitBoard(numberOfQueens);
+				Config.totalQueen = Integer.parseInt(e.getItem().toString());
+				hmBoard.reinitBoard(Config.totalQueen);
 				initData();
 				initLabelState();
 			}
 		});
-		
-		cbDisabledMsg.addChangeListener(new ChangeListener() {	
+
+		cbDisabledMsg.addChangeListener(new ChangeListener() {
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				if (cbDisabledMsg.isSelected())
-					disabledMsg = true;
-				else disabledMsg = false;
+				Config.messageDisabled = cbDisabledMsg.isSelected();
 			}
 		});
-		
+
 		btnCheckPossible.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-//				pnHumanAction.setCursor(new Cursor(Cursor.MOVE_CURSOR));
-//				hmBoard.setCursor(new Cursor(Cursor.MOVE_CURSOR));
-//				hmBoard.setRemoving(true);
-				PureBacktracking pb = new PureBacktracking(numberOfQueens);
+				// pnHumanAction.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+				// hmBoard.setCursor(new Cursor(Cursor.MOVE_CURSOR));
+				// hmBoard.setRemoving(true);
+				PureBacktracking pb = new PureBacktracking(Config.totalQueen);
 				pb.setCompareSolution(hmBoard.getPlacedQueens());
 				if (pb.isPossibleWithSolution())
-					JOptionPane.showMessageDialog(null, "Có lời giải với cách đặt cờ này", "Khả thi", JOptionPane.INFORMATION_MESSAGE);
-				else JOptionPane.showMessageDialog(null, "Không có lời giải nào", "Không khả thi", JOptionPane.ERROR_MESSAGE);
+					MyMessageDialog.showDialog(null, "Có lời giải với hướng đi này!!", "Khả thi", MyMessageDialog.SUCCESS);
+		
+				else
+					MyMessageDialog.showDialog(null, "Không có lời giải nào!!", "Không khả thi", MyMessageDialog.FAILED);
 			}
 		});
-		
-		btnShowSolution.addActionListener(new ActionListener() {	
+
+		btnShowSolution.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				PureBacktracking pb = new PureBacktracking(numberOfQueens);
+				PureBacktracking pb = new PureBacktracking(Config.totalQueen);
 				pb.setCompareSolution(hmBoard.getPlacedQueens());
 				if (pb.isPossibleWithSolution()) {
 					hmBoard.setPlacedQueens(pb.getSolution());
+					disableButton(btnCheckPossible);
 					hmBoard.repaint();
-				} else JOptionPane.showMessageDialog(null, "Không có lời giải nào", "Không khả thi", JOptionPane.ERROR_MESSAGE);
+					notifyFinish(Result.FOUND);
+				} else
+					MyMessageDialog.showDialog(null, "Không có lời giải nào!!", "Không khả thi", MyMessageDialog.FAILED);
 			}
 		});
-		
-		btnClearBoard.addActionListener(new ActionListener() {	
+
+		btnRemoveQueen.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				startRemoveQueen();
+			}
+		});
+
+		btnClearBoard.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				hmBoard.reinitBoard(numberOfQueens);
+				hmBoard.reinitBoard(Config.totalQueen);
 				initLabelState();
+				disableButton(btnCheckPossible);
 			}
 		});
-		
+
 		initActionBtnCustomBoard();
-		
+
 		initActionColorSafeCell();
 	}
+
+	public void startRemoveQueen() {
+		hmBoard.setRemoving(true);
+		btnRemoveQueen.setText("Kết thúc xóa");
+	}
 	
+	public void stopRemoveQueen() {
+		hmBoard.setRemoving(false);
+		btnRemoveQueen.setText("Xóa nhiều quân hậu");
+	}
+
 	private void initActionBtnCustomBoard() {
 		btnBgWood.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {	
+			public void actionPerformed(ActionEvent e) {
 				updateBoardWithBackground("wood");
 			}
 		});
-		
+
 		btnBgBlue.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateBoardWithBackground("blue");
 			}
 		});
-		
+
 		btnBgGreen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				updateBoardWithBackground("green");
 			}
 		});
-		
+
 		btnCustomBg.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Color c = JColorChooser.showDialog(null, "Chọn màu", Color.WHITE);
@@ -186,7 +236,7 @@ public class HumanUI extends BaseUI {
 				hmBoard.repaint();
 			}
 		});
-		
+
 		btnBasicQueen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -194,7 +244,7 @@ public class HumanUI extends BaseUI {
 				hmBoard.repaint();
 			}
 		});
-		
+
 		btnFlatQueen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -202,7 +252,7 @@ public class HumanUI extends BaseUI {
 				hmBoard.repaint();
 			}
 		});
-		
+
 		btnAeroQueen.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -210,14 +260,22 @@ public class HumanUI extends BaseUI {
 				hmBoard.repaint();
 			}
 		});
+
+		cbShowDangerCell.addChangeListener(new ChangeListener() {
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				Config.isShowDangerCell = cbShowDangerCell.isSelected();
+				hmBoard.repaint();
+			}
+		});
 	}
-	
+
 	private void updateBoardWithBackground(String name) {
 		ImageUtil.reinitBackground(name);
 		hmBoard.setUseColorBg(false);
 		hmBoard.repaint();
 	}
-	
+
 	private void initActionColorSafeCell() {
 		cbShowSafeCell.addChangeListener(new ChangeListener() {
 			@Override
@@ -232,7 +290,7 @@ public class HumanUI extends BaseUI {
 				hmBoard.repaint();
 			}
 		});
-		
+
 		lblColorSafeCell.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				Color c = JColorChooser.showDialog(null, "Chọn màu", lblColorSafeCell.getBackground());

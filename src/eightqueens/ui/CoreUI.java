@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import eightqueens.algorithm.AlgorithmPolling;
+import eightqueens.algorithm.ProcessPolling;
 import eightqueens.algorithm.NonRecursiveBacktracking;
 import eightqueens.algorithm.RecursiveBacktracking;
 import eightqueens.ui.panel.Board;
@@ -19,7 +19,7 @@ public class CoreUI extends JFrame {
 	
 	private RecursiveBacktracking recursiveBacktrackingAlg;
 	private NonRecursiveBacktracking nonRecursiveBacktracking;
-	private AlgorithmPolling polling;
+	private ProcessPolling polling;
 	private int numberOfQueens = 8;
 
 
@@ -31,7 +31,7 @@ public class CoreUI extends JFrame {
 		initComponents();
 		initActions();
 //		initData();
-        polling = new AlgorithmPolling(this); 
+//        polling = new ProcessPolling(this); 
         board.setPolling(polling);
         
 	}
@@ -51,7 +51,7 @@ public class CoreUI extends JFrame {
             nonRecursiveBacktracking.terminate();
             nonRecursiveBacktracking = null;
         }
-        nonRecursiveBacktracking = new NonRecursiveBacktracking(board, polling, numberOfQueens);
+        nonRecursiveBacktracking = null;//new NonRecursiveBacktracking(board, polling, numberOfQueens);
 		setAlgorithmStepDelay();
 	}
 
@@ -69,7 +69,7 @@ public class CoreUI extends JFrame {
         } catch (NumberFormatException e){
 	        delay = 100;
         }
-        nonRecursiveBacktracking.setStepDelay(delay);
+//        nonRecursiveBacktracking.setStepDelay(delay);
     }
 
     private void beginAlgorithm(){

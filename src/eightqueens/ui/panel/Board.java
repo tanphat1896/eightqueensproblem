@@ -6,7 +6,7 @@ import java.util.*;
 
 import javax.swing.JPanel;
 
-import eightqueens.algorithm.AlgorithmPolling;
+import eightqueens.algorithm.ProcessPolling;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Position;
 
@@ -25,7 +25,7 @@ public class Board extends JPanel {
 	/**
 	 * Board data
 	 */
-	private AlgorithmPolling polling;
+	private ProcessPolling polling;
 	private int sizeOfCell;
 	private int boardBoundary;
 	private int numberOfQueens = 8;
@@ -35,7 +35,7 @@ public class Board extends JPanel {
 	/**
 	 * Queens movement
 	 */
-	private Position borderedPos;
+//	private Position borderedPos;
 	private Position oldPosition;
 
 	private Position inspectionCell;
@@ -43,7 +43,7 @@ public class Board extends JPanel {
 
 	private Point draggingPoint;
 	private boolean isDragging;
-	private boolean isMoving;
+//	private boolean isMoving;
 	private int distanceX;
 	private int distanceY;
 
@@ -70,7 +70,7 @@ public class Board extends JPanel {
 	private void initAction() {
 		this.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				borderedPos = new Position(e.getPoint(), sizeOfCell);
+//				borderedPos = new Position(e.getPoint(), sizeOfCell);
 			}
 
 			@Override
@@ -385,7 +385,7 @@ public class Board extends JPanel {
 	/**
 	 * Setter
 	 */
-	public void setPolling(AlgorithmPolling polling) {
+	public void setPolling(ProcessPolling polling) {
 		this.polling = polling;
 	}
 

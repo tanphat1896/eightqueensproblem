@@ -1,55 +1,66 @@
 package eightqueens.algorithm;
 
 import javax.swing.*;
-
-import eightqueens.ui.panel.Board;
+import eightqueens.ui.panel.CompBoard;
+import eightqueens.util.Config;
 
 public class NonRecursiveBacktracking extends Thread {
-    private Board board;
+    private CompBoard compBoard;
     private boolean dangerCol[];
     private boolean dangerDMinus[];
     private boolean dangerDPlus[];
-    private int N;
-    private int numOfSolution = 0;
+    private int N = 8;
     private int row = 0;
     private int startCol = -1;
+    
     /**
      * UI represent
      */
-    private int stepDelay = 100;
-    private AlgorithmPolling polling;
-    private boolean running = true;
+    private ProcessPolling polling;
+    private PureBacktracking pureBT;
+    
+    private int totalSolutionFound = 0;
+    private int totalSolutionWithNQueen = 0;
 
-    public NonRecursiveBacktracking(Board board, AlgorithmPolling polling, int N) {
-        // TODO Auto-generated constructor stub
-        this.board = board;
+    public NonRecursiveBacktracking(CompBoard compBoard, ProcessPolling polling) {
+        this.compBoard = compBoard;
         this.polling = polling;
+        this.N = Config.totalQueen;
         dangerCol = new boolean[N];
         dangerDMinus = new boolean[2 * N - 1];
         dangerDPlus = new boolean[2 * N - 1];
-        this.N = N;
+        pureBT = new PureBacktracking(N);
+        calculateTotalSolutionWithNQueen();
+    }
+    
+    private void calculateTotalSolutionWithNQueen() {
+    	if (N >= 10)
+    		return;
+    	pureBT.startAlgorithm();
+    	totalSolutionWithNQueen = pureBT.getTotalSolution();
     }
 
     public void solve() {
         int col;
         boolean found = false;
         boolean queenIsPlaced = false;
-        while (!found){
-            if (!running)
-                break;
+        while (!found && polling.isSolving()){
+        	checkPause();
             queenIsPlaced = false;
             for (col = startCol + 1; col < N; col++) {
-                checkingPause();
+                polling.updateCurrentBoardState(row, col, false);
+                checkPause();
                 if (!polling.isSolving())
                     break;
-                polling.updateCurrentBoardState(row, col, false);
                 beginSleep();
                 if (canPlaceAt(row, col)) {
+                	checkPause();
                     polling.updateCurrentBoardState(row, col, true);
                     beginSleep();
-                    board.placedQueenAt(row, col);
-                    board.repaint();
-
+                    if (compBoard != null) {
+                        compBoard.placedQueenAt(row, col);
+                        compBoard.repaint();
+                    }
                     queenIsPlaced = true;
                     makeDanger(row, col, true);
 //                    beginSleep();
@@ -60,12 +71,14 @@ public class NonRecursiveBacktracking extends Thread {
                     break;
                 }
             }
+            if (!polling.isSolving())
+            	break;
             if (queenIsPlaced){
 //                break;
                 row++;
                 if (row >= N){
                     polling.pauseSolving();
-                    checkingPause();
+                    checkPause();
                     if (polling.isSolving()) {
                         revertLastValidColumn(col);
                     }
@@ -73,9 +86,11 @@ public class NonRecursiveBacktracking extends Thread {
                 }
                 startCol = -1;
             } else {
+            	checkPause();
                 startCol = getLastPlacedCol();
-                if (startCol == -1)
-                    found = true;
+                if (startCol == -1) {
+                	found = true;
+                }
                 else {
                     revertLastValidColumn(startCol);
                 }
@@ -83,19 +98,23 @@ public class NonRecursiveBacktracking extends Thread {
         }
     }
 
-    private void checkingPause(){
-        try{
-            if (polling.paused()){
-                this.wait();
-            }
-        } catch (InterruptedException e){
-//            e.printStackTrace();
-        }
+    private void checkPause(){
+    	if (!polling.isSolving())
+    		terminate();
+    	if (polling.paused()) {
+	        synchronized (this) {
+	        	try{
+	                this.wait();
+	            } catch (InterruptedException e){
+	                e.printStackTrace();
+	            }
+			}
+    	}
 
     }
 
     private int getLastPlacedCol(){
-        return board.getLastPlacedCol();
+        return compBoard.getLastPlacedCol();
     }
 
     private boolean canPlaceAt(int row, int col){
@@ -105,8 +124,8 @@ public class NonRecursiveBacktracking extends Thread {
     private void revertLastValidColumn(int lastValidCol){
         row--;
         startCol = lastValidCol;
-        board.placedQueenAt(row, -1);
-        board.repaint();
+        compBoard.placedQueenAt(row, -1);
+        compBoard.repaint();
         polling.updateCurrentBoardState(row, -1, false);
         beginSleep();
         makeDanger(row, startCol, false);
@@ -120,19 +139,19 @@ public class NonRecursiveBacktracking extends Thread {
 
     private void foundASolution(){
         polling.pauseSolving();
-        numOfSolution++;
-        JOptionPane.showMessageDialog(null, "Total solution found: " + numOfSolution);
-    }
-
-    private void finishSolving(){
-        polling.finishSolving();
+        totalSolutionFound++;
+        polling.notifyFoundASolution();
+        if (totalSolutionWithNQueen > 0 && totalSolutionFound == totalSolutionWithNQueen) {
+        	polling.finishSolving();
+        	polling.notifyFoundAllSolution();
+        }
     }
 
     private void beginSleep() {
         try {
-            Thread.sleep(stepDelay);
+            Thread.sleep(Config.solveSpeed);
         } catch (InterruptedException e) {
-//            e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
@@ -140,17 +159,15 @@ public class NonRecursiveBacktracking extends Thread {
         if (!polling.isSolving())
             return;
         polling.finishSolving();
-//        synchronized (this){
-            running = false;
-//            this.notify();
-            this.interrupt();
-//        }
     }
 
-    public void setStepDelay(int stepDelay) {
-        this.stepDelay = stepDelay;
+    public void cleanThreadData() {
+    	compBoard = null;
+    	synchronized (this){
+          this.notify();
+    	}
     }
-
+    
     private void startAlgorithm() {
         synchronized (this){
             solve();
@@ -161,4 +178,8 @@ public class NonRecursiveBacktracking extends Thread {
     public void run() {
         startAlgorithm();
     }
+    
+    public void setCompBoard(CompBoard compBoard) {
+		this.compBoard = compBoard;
+	}
 }

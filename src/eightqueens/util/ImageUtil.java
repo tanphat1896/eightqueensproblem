@@ -26,10 +26,12 @@ public class ImageUtil {
 	
 	public static void reinitBackground(String color) {
 		darkBG = getScaledImage(color + "_bg.png", size);
+		Config.boardBgImg = darkBG;
 	}
 	
 	public static void reinitQueen(String type) {
 		queen = getScaledImage(type + "_queen.png", size);
+		Config.defaultQueen = queen;
 	}
 	
 	public static ImageIcon getImageIcon(String name) {
