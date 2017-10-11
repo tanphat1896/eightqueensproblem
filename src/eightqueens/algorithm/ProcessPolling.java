@@ -49,8 +49,8 @@ public class ProcessPolling extends Thread{
         compUI.updateCurrentBoardStateInUI(row, col, valid);
     }
     
-    public void notifyFoundASolution() {
-    	compUI.notifyFoundASolution();
+    public void notifyFoundASolution(int idx, int total) {
+    	compUI.notifyFoundASolution(idx, total);
     }
     
     public void notifyFoundAllSolution() {

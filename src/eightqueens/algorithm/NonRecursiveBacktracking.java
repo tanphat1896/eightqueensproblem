@@ -1,6 +1,5 @@
 package eightqueens.algorithm;
 
-import javax.swing.*;
 import eightqueens.ui.panel.CompBoard;
 import eightqueens.util.Config;
 
@@ -34,7 +33,7 @@ public class NonRecursiveBacktracking extends Thread {
     }
     
     private void calculateTotalSolutionWithNQueen() {
-    	if (N >= 10)
+    	if (N > 12)
     		return;
     	pureBT.startAlgorithm();
     	totalSolutionWithNQueen = pureBT.getTotalSolution();
@@ -140,7 +139,7 @@ public class NonRecursiveBacktracking extends Thread {
     private void foundASolution(){
         polling.pauseSolving();
         totalSolutionFound++;
-        polling.notifyFoundASolution();
+        polling.notifyFoundASolution(totalSolutionFound, totalSolutionWithNQueen);
         if (totalSolutionWithNQueen > 0 && totalSolutionFound == totalSolutionWithNQueen) {
         	polling.finishSolving();
         	polling.notifyFoundAllSolution();

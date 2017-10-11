@@ -18,6 +18,7 @@ import javax.swing.event.ChangeListener;
 
 import eightqueens.algorithm.NonRecursiveBacktracking;
 import eightqueens.algorithm.ProcessPolling;
+import eightqueens.algorithm.WriteSolutionToFile;
 import eightqueens.ui.dialog.MyMessageDialog;
 import eightqueens.ui.panel.CompBoard;
 import eightqueens.util.Config;
@@ -46,10 +47,13 @@ public class ComputerUI extends BaseUI {
 		lblColSolution[Config.totalQueen - row - 1].setText(valid ? letter[col] : "");
 	};
 
-	public void notifyFoundASolution() {
+	public void notifyFoundASolution(int idx, int total) {
 		disableButton(btnPause);
 		enableButton(btnNextSolution);
-		MyMessageDialog.showDialog(this, "Đã tìm được một lời giải", "Thông báo", MyMessageDialog.SUCCESS);
+        WriteSolutionToFile.writeToFile("loi_giai_" + Config.totalQueen + "_hau.txt", compBoard.getPlacedQueens(), idx);
+		MyMessageDialog.showDialog(this, "Tìm được lời giải thứ " + idx + (total == 0 ? "": " trong " + total + " lời giải"), 
+				"Thông báo", 
+				MyMessageDialog.SUCCESS);
 	}
 	
 	public void notifyFoundAllSolution() {
@@ -61,6 +65,7 @@ public class ComputerUI extends BaseUI {
 	private void beginSolve() {
 		toggleControl(true);
 		prepareSolvingData();
+		WriteSolutionToFile.destroy("loi_giai_" + Config.totalQueen + "_hau.txt");
 		polling.beginSolving();
 		backtrack.start();
 	}
