@@ -19,6 +19,8 @@ import eightqueens.util.Config;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Result;
 import java.awt.Font;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 @SuppressWarnings("serial")
 public class HumanUI extends BaseUI {
@@ -33,12 +35,19 @@ public class HumanUI extends BaseUI {
 
 	public HumanUI() {
 		super();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				WelcomeUI.invoke();
+			}
+		});
 		lblTitleGame.setText("Tìm kiếm lời giải cho bài toán Tám quân hậu");
 		pnBoardCustomization.setLocation(555, 316);
 		cboNumber.setBounds(12, 42, 145, 25);
 		initBoard();
 		initComponents();
 		initAction();
+		
 	}
 
 	@Override
@@ -86,22 +95,22 @@ public class HumanUI extends BaseUI {
 		pnBoardOperation.setLocation(555, 50);
 		pnBoardOperation.setSize(230, 254);
 
-		btnClearBoard = new JButton("Làm mới bàn cờ");
+		btnClearBoard = new JButton("<html><center>Làm mới bàn cờ</center></html>");
 		changeButtonAppearance(btnClearBoard, btnBG, btnFG);
-		btnClearBoard.setBounds(12, 75, 145, 25);
+		btnClearBoard.setBounds(12, 126, 100, 40);
 
-		btnCheckPossible = new JButton("Kiểm tra khả thi");
+		btnCheckPossible = new JButton("<html><center>Kiểm tra khả thi</center></html>");
 		changeButtonAppearance(btnCheckPossible, btnBG, btnFG);
-		btnCheckPossible.setBounds(12, 106, 145, 25);
+		btnCheckPossible.setBounds(12, 79, 100, 40);
 		disableButton(btnCheckPossible);
 
-		btnShowSolution = new JButton("Hiển thị kết quả");
+		btnShowSolution = new JButton("<html><center>Hiển thị kết quả</center></html>");
 		changeButtonAppearance(btnShowSolution, btnBG, btnFG);
-		btnShowSolution.setBounds(12, 137, 145, 25);
+		btnShowSolution.setBounds(120, 79, 100, 40);
 
-		btnRemoveQueen = new JButton("Xóa nhiều quân hậu");
+		btnRemoveQueen = new JButton("<html><center>Xóa nhiều quân hậu</center></html>");
 		changeButtonAppearance(btnRemoveQueen, btnBG, btnFG);
-		btnRemoveQueen.setBounds(12, 168, 145, 25);
+		btnRemoveQueen.setBounds(120, 126, 100, 40);
 
 		JLabel lblTip = new JLabel(
 				"<html>Ghi chú: Xóa nhanh các quân hậu <br>bằng cách kéo thả chúng ra khỏi bàn cờ.</html>");
@@ -174,7 +183,9 @@ public class HumanUI extends BaseUI {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				startRemoveQueen();
+				if (hmBoard.isRemoving())
+					stopRemoveQueen();
+				else startRemoveQueen();
 			}
 		});
 
@@ -193,13 +204,15 @@ public class HumanUI extends BaseUI {
 	}
 
 	public void startRemoveQueen() {
+		if (hmBoard.noQueenPlaced())
+			return;
 		hmBoard.setRemoving(true);
 		btnRemoveQueen.setText("Kết thúc xóa");
 	}
 	
 	public void stopRemoveQueen() {
 		hmBoard.setRemoving(false);
-		btnRemoveQueen.setText("Xóa nhiều quân hậu");
+		btnRemoveQueen.setText("<html><center>Xóa nhiều quân hậu</center></html>");
 	}
 
 	private void initActionBtnCustomBoard() {

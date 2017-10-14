@@ -47,8 +47,8 @@ public class NonRecursiveBacktracking extends Thread {
         	checkPause();
             queenIsPlaced = false;
             for (col = startCol + 1; col < N; col++) {
-                polling.updateCurrentBoardState(row, col, false);
                 checkPause();
+                polling.updateCurrentBoardState(row, col, false);
                 if (!polling.isSolving())
                     break;
                 beginSleep();
@@ -57,6 +57,7 @@ public class NonRecursiveBacktracking extends Thread {
                     polling.updateCurrentBoardState(row, col, true);
                     beginSleep();
                     if (compBoard != null) {
+                    	checkPause();
                         compBoard.placedQueenAt(row, col);
                         compBoard.repaint();
                     }

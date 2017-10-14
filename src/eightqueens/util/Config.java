@@ -16,6 +16,7 @@ public class Config {
 	public static Image boardBgImg = null;
 	public static Color boardBgColor = null;
 	public static Color boardSafeCellColor = null;
+	public static boolean useLeftBoard = false;
 	
 	/**
 	 * UI Config

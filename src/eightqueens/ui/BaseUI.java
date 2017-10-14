@@ -70,7 +70,7 @@ public class BaseUI extends JFrame {
      */
     public static final int CONTROL_WIDTH = 100;
     public static final int CONTROL_HEIGHT = 25;
-    public static final Color btnBG = new Color(43, 87, 154);
+    public static final Color btnBG = new Color(65, 120, 200);
     public static final Color btnFG = Color.white;
     
     protected static final Color BORDER_COLOR = Color.GRAY;
@@ -79,7 +79,7 @@ public class BaseUI extends JFrame {
     protected static final Color FG_SUCCESS = TEXT_FG;//new Color(0, 123, 0);
     protected static final Color FG_DANGER = new Color(255, 0, 0);
     
-    protected static final Font COMMON_FONT = new Font("Segoe UI", Font.PLAIN, 13);
+    protected static final Font COMMON_FONT = new Font("Segoe UI Semibold", Font.PLAIN, 12);
     protected static final Font BORDER_TITLE_FONT = new Font("Segoe UI Semibold", Font.PLAIN, 15);
     private JLabel label;
     private JLabel label_1;
@@ -102,8 +102,8 @@ public class BaseUI extends JFrame {
 		lblTitleGame = new JLabel("Giải bài toán Tám quân hậu");
 		lblTitleGame.setForeground(TEXT_FG);
 		lblTitleGame.setHorizontalAlignment(JLabel.CENTER);
-		lblTitleGame.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 18));
-		lblTitleGame.setBounds(10, 10, 775, 28);
+		lblTitleGame.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 20));
+		lblTitleGame.setBounds(15, 10, 765, 28);
 		getContentPane().add(lblTitleGame);
 		
 		initPanelBoardCustomization();
@@ -260,6 +260,11 @@ public class BaseUI extends JFrame {
         pnSolution.setLayout(null);
         pnSolution.setBounds(15,  576, 767, 103);
         getContentPane().add(pnSolution);
+        
+        JLabel label_2 = new JLabel("");
+        label_2.setBorder(new LineBorder(TEXT_FG));
+        label_2.setBounds(112, 40, 565, 2);
+        getContentPane().add(label_2);
 
         initLabelState();
     }
@@ -344,7 +349,7 @@ public class BaseUI extends JFrame {
      * Thay đổi kiểu nút
      * @param btn
      */
-	public void changeButtonAppearance(JButton btn, Color bg, Color fg){
+	public static void changeButtonAppearance(JButton btn, Color bg, Color fg){
 		btn.setHorizontalAlignment(JButton.CENTER);
 	    btn.setOpaque(true);
 	    btn.setForeground(fg);
@@ -352,6 +357,8 @@ public class BaseUI extends JFrame {
 	    btn.setBorderPainted(false);
 	    btn.setFocusPainted(false);
 	    btn.setFont(COMMON_FONT);
+	    btn.setCursor(new Cursor(Cursor.HAND_CURSOR));
+//	    btn.setBorder(BorderFactory.createLineBorder(fg, 2));
     }
 	
 	/**
@@ -360,7 +367,7 @@ public class BaseUI extends JFrame {
 	 * @param style
 	 * @param size
 	 */
-	public void changeFontRenderer(JComponent cpn, int style, int size) {
+	public static void changeFontRenderer(JComponent cpn, int style, int size) {
 		cpn.setFont(new Font("SansSerif", style, size));
 	}
 	

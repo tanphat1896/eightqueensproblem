@@ -20,8 +20,8 @@ import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 public class MyMessageDialog extends JDialog {
-	public static final ImageIcon SUCCESS = ImageUtil.getImageIconWithSize("success.png", 40);
-	public static final ImageIcon FAILED = ImageUtil.getImageIconWithSize("failed.png", 40);
+	public static final ImageIcon SUCCESS = ImageUtil.getImageIconWithSize("success.png", 32);
+	public static final ImageIcon FAILED = ImageUtil.getImageIconWithSize("failed.png", 32);
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblIcon;
 	private JLabel lblMsg;
@@ -43,20 +43,20 @@ public class MyMessageDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public MyMessageDialog() {
-		setBounds(100, 100, 381, 144);
+		setBounds(100, 100, 381, 129);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
 		lblIcon = new JLabel("");
-		lblIcon.setBounds(12, 11, 48, 48);
+		lblIcon.setBounds(12, 11, 40, 40);
 		lblIcon.setHorizontalAlignment(JLabel.CENTER);
 		contentPanel.add(lblIcon);
 		
 		lblMsg = new JLabel("<html>New<br> label</html>");
-		lblMsg.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-		lblMsg.setBounds(72, 11, 281, 48);
+		lblMsg.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
+		lblMsg.setBounds(64, 11, 289, 40);
 		contentPanel.add(lblMsg);
 		
 		JButton btnNewButton = new JButton("\u0110\u00F3ng l\u1EA1i");
@@ -68,9 +68,9 @@ public class MyMessageDialog extends JDialog {
 		});
 		btnNewButton.setForeground(Color.WHITE);
 		btnNewButton.setBorderPainted(false);
-		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 13));
+		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
 		btnNewButton.setBackground(BaseUI.btnBG);
-		btnNewButton.setBounds(253, 68, 100, 25);
+		btnNewButton.setBounds(274, 56, 79, 25);
 		contentPanel.add(btnNewButton);
 	}
 	

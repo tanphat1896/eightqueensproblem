@@ -2,6 +2,8 @@ package eightqueens.util;
 
 import java.awt.Point;
 
+import eightqueens.ui.panel.BaseBoard;
+
 public class Position {
 	private int row;
 	private int col;
@@ -18,7 +20,8 @@ public class Position {
 	
 	public Position(Point p, int sizeOfCell) {
 		row = (int)p.getY()/sizeOfCell;
-		col = (int)p.getX()/sizeOfCell;
+		int x = Config.useLeftBoard ? p.x : p.x - BaseBoard.GAP;
+		col = x/sizeOfCell;
 	}
 	
 	public Point toPoint(int sizeOfCell) {
@@ -39,5 +42,9 @@ public class Position {
 	
 	public void setCol(int col) {
 		this.col = col;
+	}
+	
+	public String toString() {
+		return row + ", " + col;
 	}
 }

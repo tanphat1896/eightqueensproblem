@@ -10,6 +10,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 import javax.swing.JTextField;
@@ -34,6 +36,13 @@ public class ComputerUI extends BaseUI {
 
 	public ComputerUI() {
 		super();
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent arg0) {
+				stopSolve();
+				WelcomeUI.invoke();
+			}
+		});
 		initBoard();
 		initComponents();
 		initAction();
@@ -404,17 +413,18 @@ public class ComputerUI extends BaseUI {
 			}
 		});
 
-		cbShowDangerCell.addChangeListener(new ChangeListener() {
+		cbShowDangerCell.addActionListener(new ActionListener() {
 			@Override
-			public void stateChanged(ChangeEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				Config.isShowDangerCell = cbShowDangerCell.isSelected();
 				compBoard.repaint();
 			}
 		});
 		
-		cbShowInspectedCell.addChangeListener(new ChangeListener() {
+		cbShowInspectedCell.addActionListener(new ActionListener() {
 			@Override
-			public void stateChanged(ChangeEvent e) {
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				Config.isShowInspectedCell = cbShowInspectedCell.isSelected();
 				compBoard.repaint();
 			}
@@ -428,9 +438,9 @@ public class ComputerUI extends BaseUI {
 	}
 
 	private void initActionColorSafeCell() {
-		cbShowSafeCell.addChangeListener(new ChangeListener() {
+		cbShowSafeCell.addActionListener(new ActionListener() {
 			@Override
-			public void stateChanged(ChangeEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				if (cbShowSafeCell.isSelected()) {
 					compBoard.setHintSafeCell(true);
 					lblColorSafeCell.setEnabled(true);
@@ -438,7 +448,7 @@ public class ComputerUI extends BaseUI {
 					compBoard.setHintSafeCell(false);
 					lblColorSafeCell.setEnabled(false);
 				}
-				compBoard.repaint();
+				compBoard.repaint();		
 			}
 		});
 

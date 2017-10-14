@@ -10,6 +10,7 @@ import java.awt.event.MouseMotionAdapter;
 import javax.swing.JLabel;
 
 import eightqueens.ui.HumanUI;
+import eightqueens.util.Config;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Position;
 import eightqueens.util.Result;
@@ -18,6 +19,8 @@ import java.awt.Font;
 @SuppressWarnings("serial")
 public class HumanBoard extends BaseBoard {
 	private HumanUI hmUI;
+	private int minBoundary;
+	private int maxBoundary;
 
 	private boolean isRemoving = false;
 
@@ -43,6 +46,7 @@ public class HumanBoard extends BaseBoard {
 	public HumanBoard(HumanUI hmUI) {
 		super();
 		this.hmUI = hmUI;
+		initBoundary();
 		initLabelRemoveQueen();
 		initAction();
 	}
@@ -50,8 +54,14 @@ public class HumanBoard extends BaseBoard {
 	public HumanBoard(HumanUI hmUI, int totalQueen) {
 		super(totalQueen);
 		this.hmUI = hmUI;
+		initBoundary();
 		initLabelRemoveQueen();
 		initAction();
+	}
+	
+	private void initBoundary() {
+		minBoundary = Config.useLeftBoard ? 0: GAP;
+		maxBoundary = Config.useLeftBoard ? boardBoundary: boardBoundary + GAP;
 	}
 
 	private void checkDangerCell() {
@@ -148,7 +158,11 @@ public class HumanBoard extends BaseBoard {
 	 * Event
 	 */
 	private void handleMousePressed(Point p) {
-		if (p.getX() >= boardBoundary || p.getY() >= boardBoundary)
+		int x = p.x;
+		int y = p.y;
+		if (x >= maxBoundary || y >= boardBoundary)
+			return;
+		if (!Config.useLeftBoard && x <= GAP)
 			return;
 		Position pos = new Position(p, sizeOfCell);
 		if (isRemoving) {
@@ -197,7 +211,7 @@ public class HumanBoard extends BaseBoard {
 	}
 
 	private void releaseDraggingQueen(Point p) {
-		if (p.getX() < boardBoundary && p.getY() < boardBoundary && p.getX() >= 0 && p.getY() >= 0) {
+		if (p.getX() < maxBoundary && p.getY() < boardBoundary && p.getX() >= minBoundary && p.getY() >= 0) {
 			Position pos = new Position(p, sizeOfCell);
 			if (isSafe(pos)) {
 				placeQueen(pos);

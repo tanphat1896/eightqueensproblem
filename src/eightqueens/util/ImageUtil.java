@@ -20,7 +20,7 @@ public class ImageUtil {
 		darkBG = getScaledImage("wood_bg.png", size);
 		queen = getScaledImage("basic_queen.png", size);
 		danger = getScaledImage("x.png", size);
-		ok = getScaledImage("ok.png", size);
+		ok = getScaledImage("found.png", size);
 		poll = getScaledImage("poll.png", size);
 	}
 	

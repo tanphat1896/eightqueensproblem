@@ -17,6 +17,13 @@ public class WriteSolutionToFile extends Thread{
 	}
 	
 	public static boolean writeToFile(String fileName, int[] solution, int index) {
+		writeToFileStyle2(fileName, solution, index);
+		
+		return true;
+	}
+	
+	@SuppressWarnings("unused")
+	private static void writeToFileStyle1(String fileName, int [] solution, int index) {
 		int N = solution.length;
 		File f = new File(fileName);
 		if (!f.exists())
@@ -27,8 +34,8 @@ public class WriteSolutionToFile extends Thread{
 				e.printStackTrace();
 			}
 		try(FileWriter fw = new FileWriter(fileName, true);
-			    BufferedWriter bw = new BufferedWriter(fw);
-			    PrintWriter out = new PrintWriter(bw)) {
+				BufferedWriter bw = new BufferedWriter(fw);
+				PrintWriter out = new PrintWriter(bw)) {
 			out.println();
 			String line = "********* Loi giai thu " + index + "**********";
 			out.println(line);
@@ -66,8 +73,41 @@ public class WriteSolutionToFile extends Thread{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		return true;
+	}
+	
+	private static void writeToFileStyle2(String fileName, int [] solution, int index) {
+		int N = solution.length;
+		File f = new File(fileName);
+		if (!f.exists())
+			try {
+				f.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		try(FileWriter fw = new FileWriter(fileName, true);
+			    BufferedWriter bw = new BufferedWriter(fw);
+			    PrintWriter out = new PrintWriter(bw)) {
+			out.println();
+			String line = "----Loi giai thu " + index + "----";
+			out.println(line);
+			line = "Hang | Cot ";
+			out.println(line);
+			for (int i = 0; i < N; i++) {
+				if ((N-i) >= 10)
+					line = " " + (N-i) + "  |";
+				else line = "  " + (N-i) + "  |";
+				for (int j = 0; j < N; j++) {
+					if (solution[i] == j)
+						line += "  " + (char)(65+j);
+				}
+				out.println(line);
+			}
+			out.println("--------------------------");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public static void main(String[] args) {
