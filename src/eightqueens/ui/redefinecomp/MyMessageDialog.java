@@ -1,22 +1,17 @@
-package eightqueens.ui.dialog;
+package eightqueens.ui.redefinecomp;
 
 import java.awt.BorderLayout;
 import java.awt.Window;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JDialog;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import eightqueens.ui.BaseUI;
+import eightqueens.util.GUIUtil;
 import eightqueens.util.ImageUtil;
 
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.event.*;
 
 @SuppressWarnings("serial")
 public class MyMessageDialog extends JDialog {
@@ -43,11 +38,13 @@ public class MyMessageDialog extends JDialog {
 	 * Create the dialog.
 	 */
 	public MyMessageDialog() {
-		setBounds(100, 100, 381, 129);
+		setResizable(false);
+		setBounds(100, 100, 370, 119);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		contentPanel.setBackground(GUIUtil.MAIN_BG);
 		
 		lblIcon = new JLabel("");
 		lblIcon.setBounds(12, 11, 40, 40);
@@ -55,21 +52,18 @@ public class MyMessageDialog extends JDialog {
 		contentPanel.add(lblIcon);
 		
 		lblMsg = new JLabel("<html>New<br> label</html>");
-		lblMsg.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
+		lblMsg.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblMsg.setBounds(64, 11, 289, 40);
 		contentPanel.add(lblMsg);
 		
 		JButton btnNewButton = new JButton("\u0110\u00F3ng l\u1EA1i");
+		GUIUtil.changeButtonAppearance(btnNewButton);
 		btnNewButton.setFocusable(false);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				disposeDialog();
 			}
 		});
-		btnNewButton.setForeground(Color.WHITE);
-		btnNewButton.setBorderPainted(false);
-		btnNewButton.setFont(new Font("Segoe UI Semibold", Font.PLAIN, 12));
-		btnNewButton.setBackground(BaseUI.btnBG);
 		btnNewButton.setBounds(274, 56, 79, 25);
 		contentPanel.add(btnNewButton);
 	}

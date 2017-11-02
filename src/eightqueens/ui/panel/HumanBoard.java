@@ -21,6 +21,7 @@ public class HumanBoard extends BaseBoard {
 	private HumanUI hmUI;
 	private int minBoundary;
 	private int maxBoundary;
+	private int totalQueenPlaced = 0;
 
 	private boolean isRemoving = false;
 
@@ -116,13 +117,6 @@ public class HumanBoard extends BaseBoard {
 		return true;
 	}
 
-	public boolean allQueensPlaced() {
-		for (int i = 0; i < numberOfQueens; i++)
-			if (placedQueens[i] < 0)
-				return false;
-		return true;
-	}
-
 	public void checkFinish() {
 		checkDangerCell();
 		if (allQueensPlaced()) {
@@ -175,12 +169,14 @@ public class HumanBoard extends BaseBoard {
 				return;
 			}
 			placeQueen(pos);
+			totalQueenPlaced++;
 			hmUI.updateCurrentBoardStateInUI(pos.getRow(), pos.getCol(), true);
 		} else {
 			lblRemoveQueen.setVisible(true);
 			oldPos = pos;
 			calculateDistance(pos.toPoint(sizeOfCell), p);
 			removeQueen(pos);
+			totalQueenPlaced--;
 			isDragging = true;
 			draggingPoint = pos.toPoint(sizeOfCell);
 			hmUI.updateCurrentBoardStateInUI(pos.getRow(), pos.getCol(), false);
@@ -195,6 +191,7 @@ public class HumanBoard extends BaseBoard {
 			return;
 		removeQueen(pos);
 		repaint();
+		totalQueenPlaced--;
 		hmUI.updateCurrentBoardStateInUI(pos.getRow(), pos.getCol(), false);
 		hmUI.notifyFinish(Result.NOTFOUND);
 		if (noQueenPlaced()) {
@@ -213,6 +210,7 @@ public class HumanBoard extends BaseBoard {
 	private void releaseDraggingQueen(Point p) {
 		if (p.getX() < maxBoundary && p.getY() < boardBoundary && p.getX() >= minBoundary && p.getY() >= 0) {
 			Position pos = new Position(p, sizeOfCell);
+			totalQueenPlaced++;
 			if (isSafe(pos)) {
 				placeQueen(pos);
 				hmUI.updateCurrentBoardStateInUI(pos.getRow(), pos.getCol(), true);
@@ -225,10 +223,10 @@ public class HumanBoard extends BaseBoard {
 		/**
 		 * Thay vì đặt về ô cũ, kéo ra khỏi biên == xóa quân cờ đó
 		 */
-		// else {
-		// placeQueen(oldPos);
-		// hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
-		// }
+//		 else {
+//			 placeQueen(oldPos);
+//			 hmUI.updateCurrentBoardStateInUI(oldPos.getRow(), oldPos.getCol(), true);
+//		 }
 		clearDragging();
 	}
 
@@ -299,5 +297,13 @@ public class HumanBoard extends BaseBoard {
 		this.placedQueens = placedQueens;
 		for (int i = 0; i < numberOfQueens; i++)
 			hmUI.updateCurrentBoardStateInUI(i, placedQueens[i], true);
+	}
+	
+	public int getRemainQueen() {
+		return Config.totalQueen - totalQueenPlaced;
+	}
+	
+	public void setTotalQueenPlaced(int totalQueenPlaced) {
+		this.totalQueenPlaced = totalQueenPlaced;
 	}
 }

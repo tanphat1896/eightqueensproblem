@@ -11,7 +11,7 @@ public class PureBacktracking {
 	private int totalQueen = 4;
 	private int totalSolution = 0;
 	private int[] solution;
-	private int[] compareSolution;
+	private int[] providedQueen;
 	private boolean dangerCol[];
 	private boolean dangerDMinus[];
 	private boolean dangerDPlus[];
@@ -27,10 +27,10 @@ public class PureBacktracking {
 
 	private void initData() {
 		solution = new int[totalQueen];
-		compareSolution = new int[totalQueen];
+		providedQueen = new int[totalQueen];
 		for (int i = 0; i < totalQueen; i++) {
 			solution[i] = -1;
-			compareSolution[i] = -1;
+			providedQueen[i] = -1;
 		}
 		dangerCol = new boolean[totalQueen];
 		dangerDMinus = new boolean[2 * totalQueen - 1];
@@ -83,13 +83,13 @@ public class PureBacktracking {
 			return;
 		if (row >= totalQueen)
 		    return;
-		if (compareSolution[row] >= 0)
+		if (providedQueen[row] >= 0)
 		    if (row == totalQueen - 1)
 		        found = true;
 		    else
                 solveWithExistSolution(row + 1);
 		for (int col = 0; col < totalQueen; col++) {
-			if (compareSolution[row] < 0 && canPlaceAt(row, col)) {
+			if (providedQueen[row] < 0 && canPlaceAt(row, col)) {
 				placeQueen(row, col);
 				if (row < totalQueen - 1)
 					solveWithExistSolution(row + 1);
@@ -154,12 +154,12 @@ public class PureBacktracking {
 		this.solution = solution;
 	}
 	
-	public void setCompareSolution(int[] compareSolution) {
+	public void setProvidedQueens(int[] queens) {
 		for (int i = 0; i < totalQueen; i++) {
-			this.compareSolution[i] = compareSolution[i];
-			if (compareSolution[i] >= 0) {
-				solution[i] = compareSolution[i];
-				notifyDangerArea(i, compareSolution[i]);
+			this.providedQueen[i] = queens[i];
+			if (queens[i] >= 0) {
+				solution[i] = queens[i];
+				notifyDangerArea(i, queens[i]);
 			}
 //			System.out.println("Row " + i + ": " + compareSolution[i] + " ; " + solution[i]);
 		}

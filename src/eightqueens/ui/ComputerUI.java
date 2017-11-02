@@ -2,36 +2,23 @@ package eightqueens.ui;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
-import eightqueens.algorithm.NonRecursiveBacktracking;
-import eightqueens.algorithm.ProcessPolling;
-import eightqueens.algorithm.WriteSolutionToFile;
-import eightqueens.ui.dialog.MyMessageDialog;
+import eightqueens.algorithm.*;
 import eightqueens.ui.panel.CompBoard;
-import eightqueens.util.Config;
-import eightqueens.util.ImageUtil;
-import eightqueens.util.Position;
+import eightqueens.ui.redefinecomp.MyMessageDialog;
+import eightqueens.util.*;
 
 import javax.swing.JSlider;
 
 @SuppressWarnings("serial")
 public class ComputerUI extends BaseUI {
-	private NonRecursiveBacktracking backtrack;
+	private NonRecBacktracking backtrack;
+//	private Backtracking backtrack;
 	private ProcessPolling polling;
 
 	public ComputerUI() {
@@ -53,7 +40,9 @@ public class ComputerUI extends BaseUI {
 		if (col != -1)
     		compBoard.setInspectionCell(new Position(row, col), valid);
 		compBoard.repaint();
-		lblColSolution[Config.totalQueen - row - 1].setText(valid ? letter[col] : "");
+		int idx = Config.totalQueen - row - 1;
+		if (idx >= 0 && idx < Config.totalQueen)
+			lblColSolution[idx].setText(valid ? letter[col] : "");
 	};
 
 	public void notifyFoundASolution(int idx, int total) {
@@ -80,7 +69,6 @@ public class ComputerUI extends BaseUI {
 	}
 
 	private void prepareSolvingData() {
-		compBoard.reinitBoard(Config.totalQueen);
 		if (backtrack != null) {
 			backtrack.cleanThreadData();
 			backtrack.interrupt();
@@ -88,8 +76,15 @@ public class ComputerUI extends BaseUI {
 			polling.interrupt();
 			polling = null;
 		}
+		compBoard.reinitBoard(Config.totalQueen);
 		polling = new ProcessPolling(this);
-		backtrack = new NonRecursiveBacktracking(compBoard, polling);
+		
+		/**
+		 * CHọn giải thuật đệ quy hay không đệ quy
+		 */
+		backtrack = new NonRecBacktracking(compBoard, polling);
+//		backtrack = new NonRecBacktrackingExt(compBoard, polling);
+//		backtrack = new RecursiveBacktrackingExt(compBoard, polling);
 	}
 
 	private void stopSolve() {
@@ -105,15 +100,22 @@ public class ComputerUI extends BaseUI {
 			return;
 		if (paused) {
 			polling.pauseSolving();
+//			try {
+//				Thread.sleep(100);
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+			disableButton(btnNextSolution);
 			enableButton(btnResume);
 			disableButton(btnPause);
 		} else {
-			polling.resumeSolving();
 			disableButton(btnResume);
 			enableButton(btnPause);
 			synchronized (backtrack) {
-				backtrack.notify();
+				backtrack.notifyAll();
 			}
+			polling.resumeSolving();
 		}
 	}
 
@@ -171,32 +173,38 @@ public class ComputerUI extends BaseUI {
 	private void initComponents() {
 		lblTitleGame.setText("Giải bài toán Tám quân hậu bằng giải thuật Quay lui");
 		pnBoardOperation.setBounds(550, 50, 230, 272);
-		pnBoardCustomization.setBounds(550, 334, 230, 230);
+		pnBoardCustomization.setBounds(550, 334, 230, 233);
 
 		initTimer();
 
 		btnClearBoard = new JButton("Làm mới bàn cờ");
-		changeButtonAppearance(btnClearBoard, btnBG, btnFG);
+//		changeButtonAppearance(btnClearBoard, btnBG, btnFG);
+		GUIUtil.changeButtonAppearance(btnClearBoard);
 		btnClearBoard.setBounds(12, 231, 206, 28);
 
 		btnSolve = new JButton("Bắt đầu");
-		changeButtonAppearance(btnSolve, btnBG, btnFG);
+//		changeButtonAppearance(btnSolve, btnBG, btnFG);
+		GUIUtil.changeButtonAppearance(btnSolve);
 		btnSolve.setBounds(12, 132, 100, 28);
 
 		btnStop = new JButton("Kết thúc");
-		changeButtonAppearance(btnStop, btnBG, btnFG);
+//		changeButtonAppearance(btnStop, btnBG, btnFG);
+		GUIUtil.changeButtonAppearance(btnStop);
 		btnStop.setBounds(118, 132, 100, 28);
 
 		btnPause = new JButton("Tạm dừng");
-		changeButtonAppearance(btnPause, btnBG, btnFG);
+//		changeButtonAppearance(btnPause, btnBG, btnFG);
+		GUIUtil.changeButtonAppearance(btnPause);
 		btnPause.setBounds(12, 165, 100, 28);
 
 		btnResume = new JButton("Tiếp tục");
-		changeButtonAppearance(btnResume, btnBG, btnFG);
+//		changeButtonAppearance(btnResume, btnBG, btnFG);
+		GUIUtil.changeButtonAppearance(btnResume);
 		btnResume.setBounds(118, 165, 100, 28);
 
 		btnNextSolution = new JButton("Lời giải tiếp theo");
-		changeButtonAppearance(btnNextSolution, btnBG, btnFG);
+//		changeButtonAppearance(btnNextSolution, btnBG, btnFG);
+		GUIUtil.changeButtonAppearance(btnNextSolution);
 		btnNextSolution.setBounds(12, 198, 206, 28);
 
 		pnBoardOperation.add(btnClearBoard);
@@ -213,15 +221,17 @@ public class ComputerUI extends BaseUI {
 		
 		
 		cbShowInspectedCell = new JCheckBox("Đánh dấu ô đang kiểm tra");
-		cbShowInspectedCell.setFont(COMMON_FONT);
+		cbShowInspectedCell.setSelected(Config.isShowInspectedCell);
+		cbShowInspectedCell.setFont(GUIUtil.MAIN_FONT);
+		cbShowInspectedCell.setBackground(GUIUtil.MAIN_BG);
 		cbShowInspectedCell.setBounds(10, 197, 202, 21);
 		pnBoardCustomization.add(cbShowInspectedCell);
 	}
 
 	private void initTimer() {
-		lblDelay = new JLabel("Tốc độ tìm (mili giây):");
-		lblDelay.setFont(COMMON_FONT);
-		lblDelay.setBounds(12, 75, 138, 15);
+		lblDelay = new JLabel("Độ trễ (mili giây):");
+		lblDelay.setFont(GUIUtil.MAIN_FONT);
+		lblDelay.setBounds(12, 75, 122, 15);
 
 		lblDelayValue = new JLabel("100");
 		lblDelayValue.setFont(new Font("Segoe UI", Font.BOLD, 13));
@@ -244,9 +254,10 @@ public class ComputerUI extends BaseUI {
 		sliderDelay.setValue(100);
 		sliderDelay.setMaximum(500);
 		sliderDelay.setBounds(5, 95, 220, 25);
+		sliderDelay.setBackground(GUIUtil.MAIN_BG);
 
 		tfDelay = new JTextField("100");
-		tfDelay.setFont(COMMON_FONT);
+		tfDelay.setFont(GUIUtil.MAIN_FONT);
 		tfDelay.setVisible(false);
 		tfDelay.setBounds(12, 95, 206, 25);
 
@@ -349,6 +360,7 @@ public class ComputerUI extends BaseUI {
 		btnNextSolution.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				disableButton(btnNextSolution);
 				pauseAndResumeSolving(false);
 			}
 		});
@@ -426,7 +438,8 @@ public class ComputerUI extends BaseUI {
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				Config.isShowInspectedCell = cbShowInspectedCell.isSelected();
-				compBoard.repaint();
+				if (!compBoard.allQueensPlaced())
+					compBoard.repaint();
 			}
 		});
 	}

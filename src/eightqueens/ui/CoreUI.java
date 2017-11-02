@@ -7,8 +7,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import eightqueens.algorithm.ProcessPolling;
-import eightqueens.algorithm.NonRecursiveBacktracking;
-import eightqueens.algorithm.RecursiveBacktracking;
+import eightqueens.algorithm.NonRecBacktracking;
+import eightqueens.algorithm.RecBacktrackingExt;
 import eightqueens.ui.panel.Board;
 import eightqueens.util.Position;
 
@@ -17,8 +17,8 @@ public class CoreUI extends JFrame {
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 700;
 	
-	private RecursiveBacktracking recursiveBacktrackingAlg;
-	private NonRecursiveBacktracking nonRecursiveBacktracking;
+	private RecBacktrackingExt recursiveBacktrackingAlg;
+	private NonRecBacktracking nonRecursiveBacktracking;
 	private ProcessPolling polling;
 	private int numberOfQueens = 8;
 

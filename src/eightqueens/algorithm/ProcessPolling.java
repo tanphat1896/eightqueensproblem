@@ -60,6 +60,9 @@ public class ProcessPolling extends Thread{
     public void test(){
 
     }
-    public void run(){
-    }
+    public void run(){}
+
+    public void setCompUI(ComputerUI compUI) {
+		this.compUI = compUI;
+	}
 }

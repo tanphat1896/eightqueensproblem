@@ -38,6 +38,8 @@ public class CompBoard extends BaseBoard {
 	private void drawInspectionCell(Graphics g) {
 		if (!Config.isShowInspectedCell)
 			return;
+		if (allQueensPlaced())
+			inspectionCell = null;
 		if (inspectionCell != null) {
 			if (inspectionCell.getRow() >= numberOfQueens || inspectionCell.getCol() >= numberOfQueens)
 				return;

@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
-encoding//src/eightqueens/algorithm/NonRecursiveBacktracking.java=UTF-8
+encoding//src/eightqueens/algorithm/NonRecBacktracking.java=UTF-8
+encoding//src/eightqueens/algorithm/NonRecBacktrackingExt.java=UTF-8
 encoding//src/eightqueens/algorithm/PureBacktracking.java=UTF-8
 encoding//src/eightqueens/ui/BaseUI.java=UTF-8
 encoding//src/eightqueens/ui/ComputerUI.java=UTF-8

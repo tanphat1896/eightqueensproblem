@@ -3,7 +3,7 @@ package eightqueens.algorithm;
 import eightqueens.ui.panel.CompBoard;
 import eightqueens.util.Config;
 
-public class NonRecursiveBacktracking extends Thread {
+public class NonRecBacktracking extends Thread {
     private CompBoard compBoard;
     private boolean dangerCol[];
     private boolean dangerDMinus[];
@@ -21,7 +21,7 @@ public class NonRecursiveBacktracking extends Thread {
     private int totalSolutionFound = 0;
     private int totalSolutionWithNQueen = 0;
 
-    public NonRecursiveBacktracking(CompBoard compBoard, ProcessPolling polling) {
+    public NonRecBacktracking(CompBoard compBoard, ProcessPolling polling) {
         this.compBoard = compBoard;
         this.polling = polling;
         this.N = Config.totalQueen;
@@ -56,8 +56,8 @@ public class NonRecursiveBacktracking extends Thread {
                 	checkPause();
                     polling.updateCurrentBoardState(row, col, true);
                     beginSleep();
+                    checkPause();
                     if (compBoard != null) {
-                    	checkPause();
                         compBoard.placedQueenAt(row, col);
                         compBoard.repaint();
                     }
@@ -114,6 +114,8 @@ public class NonRecursiveBacktracking extends Thread {
     }
 
     private int getLastPlacedCol(){
+    	if (compBoard == null)
+    		return -1;
         return compBoard.getLastPlacedCol();
     }
 
@@ -148,11 +150,14 @@ public class NonRecursiveBacktracking extends Thread {
     }
 
     private void beginSleep() {
+    	if (Thread.interrupted())
+    		return;
         try {
             Thread.sleep(Config.solveSpeed);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    	
     }
 
     public void terminate(){
@@ -176,6 +181,8 @@ public class NonRecursiveBacktracking extends Thread {
 
     @Override
     public void run() {
+    	if (Thread.interrupted())
+    		return;
         startAlgorithm();
     }
     

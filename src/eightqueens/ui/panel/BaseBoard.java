@@ -2,10 +2,10 @@ package eightqueens.ui.panel;
 
 import java.awt.*;
 import java.util.*;
-
 import javax.swing.JPanel;
 
 import eightqueens.util.Config;
+import eightqueens.util.GUIUtil;
 import eightqueens.util.ImageUtil;
 import eightqueens.util.Position;
 
@@ -17,6 +17,7 @@ public class BaseBoard extends JPanel {
 	public static final int EDGE_SIZE = 480;
 	public static final int GAP = 40;
 	public static final Color TEXT_COLOR = Color.darkGray;
+	public static final Color WRAP_LINE_COLOR = GUIUtil.BORDER_PANEL;
 	public static final Color LINE_COLOR = Color.white;
 	
 	protected boolean useLightBg = false;
@@ -51,6 +52,7 @@ public class BaseBoard extends JPanel {
 	private void initUI() {
 		this.setLayout(null);
 		this.setSize(EDGE_SIZE + GAP + 5, EDGE_SIZE + GAP + 1);
+		this.setBackground(GUIUtil.MAIN_BG);
 	}
 
 	public void reinitBoard(int numOfQueen) {
@@ -132,6 +134,13 @@ public class BaseBoard extends JPanel {
 		return true;
 	}
 
+	public boolean allQueensPlaced() {
+		for (int i = 0; i < numberOfQueens; i++)
+			if (placedQueens[i] < 0)
+				return false;
+		return true;
+	}
+	
 	/**
 	 * Paint Methods
 	 */
@@ -151,19 +160,26 @@ public class BaseBoard extends JPanel {
 	}
 
 	private void drawGridToTheLeft(Graphics g) {
-		for (int i = 0; i < numberOfQueens; i++) {
+		for (int i = 1; i < numberOfQueens; i++) {
 			g.drawLine(0, i * sizeOfCell, boardBoundary, i * sizeOfCell);
 			g.drawLine(i * sizeOfCell, 0, i * sizeOfCell, boardBoundary);
 		}
+		g.setColor(WRAP_LINE_COLOR);
+		g.drawLine(0, 0, boardBoundary, 0);
+		g.drawLine(0, 0, 0, boardBoundary);
 		g.drawLine(boardBoundary, 0, boardBoundary, boardBoundary);
 		g.drawLine(0, boardBoundary, boardBoundary, boardBoundary);
 	}
 
 	private void drawGridToTheRight(Graphics g) {
-		for (int i = 0; i < numberOfQueens; i++) {
+		for (int i = 1; i < numberOfQueens; i++) {
 			g.drawLine(GAP, i * sizeOfCell, boardBoundary + GAP, i * sizeOfCell);
 			g.drawLine(i * sizeOfCell + GAP, 0, i * sizeOfCell + GAP, boardBoundary);
 		}
+		
+		g.setColor(WRAP_LINE_COLOR);
+		g.drawLine(GAP, 0, boardBoundary + GAP, 0);
+		g.drawLine(GAP, 0, GAP, boardBoundary);
 		g.drawLine(boardBoundary + GAP, 0, boardBoundary + GAP, boardBoundary);
 		g.drawLine(GAP, boardBoundary, boardBoundary + GAP, boardBoundary);
 	}
@@ -173,7 +189,8 @@ public class BaseBoard extends JPanel {
 			for (int j = 0; j < numberOfQueens; j++) {
 				if ((i % 2 != 0 && j % 2 == 0) || (i % 2 == 0 && j % 2 != 0)) {
 					if (!withColor) {
-						Image img = (Config.boardBgImg != null) ? Config.boardBgImg : ImageUtil.darkBG;
+						Image img = ImageUtil.darkBG;
+//						Image img = (Config.boardBgImg != null) ? Config.boardBgImg : ImageUtil.darkBG;
 						g.drawImage(img, i * sizeOfCell + 1 + (Config.useLeftBoard ? 0 : GAP), j * sizeOfCell + 1, null);
 					} else {
 						Color bg = (Config.boardBgColor != null) ? Config.boardBgColor : bgColor;
@@ -209,11 +226,11 @@ public class BaseBoard extends JPanel {
 	}
 	
 	private void drawIndexToTheLeft(Graphics g) {
-		g.drawString("A", sizeOfCell / 2 - 5 + GAP, boardBoundary + 20);
+		g.drawString("A", sizeOfCell / 2 - 5 + GAP, boardBoundary + 25);
 		g.drawString("1", 10, (numberOfQueens - 1) * sizeOfCell + sizeOfCell / 2 + 5);
 
 		for (int i = 1; i < numberOfQueens; i++) {
-			g.drawString((char) (65 + i) + "", i * sizeOfCell + sizeOfCell / 2 - 5 + GAP, boardBoundary + 20);
+			g.drawString((char) (65 + i) + "", i * sizeOfCell + sizeOfCell / 2 - 5 + GAP, boardBoundary + 25);
 			g.drawString("" + (i + 1), 10, (numberOfQueens - i - 1) * sizeOfCell + sizeOfCell / 2 + 5);
 		}
 	}
@@ -310,7 +327,8 @@ public class BaseBoard extends JPanel {
 			int col = placedQueens[row];
 			if (col < 0)
 				continue;
-			Image img = (Config.defaultQueen != null) ? Config.defaultQueen : ImageUtil.queen;
+			Image img = ImageUtil.queen;
+//			Image img = (Config.defaultQueen != null) ? Config.defaultQueen : ImageUtil.queen;
 			drawImage(g, new Position(row, col).toPoint(sizeOfCell), img);
 			drawDangerArea(g);
 			if (isHintSafeCell)

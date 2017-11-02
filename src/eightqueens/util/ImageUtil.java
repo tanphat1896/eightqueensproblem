@@ -17,8 +17,8 @@ public class ImageUtil {
 	
 	public static void initImage(int size) {
 		ImageUtil.size = size;
-		darkBG = getScaledImage("wood_bg.png", size);
-		queen = getScaledImage("basic_queen.png", size);
+		darkBG = getScaledImage((Config.boardBgImg == null ? "wood": Config.boardBgImg) + "_bg.png", size);
+		queen = getScaledImage((Config.defaultQueen == null ? "basic": Config.defaultQueen) + "_queen.png", size);
 		danger = getScaledImage("x.png", size);
 		ok = getScaledImage("found.png", size);
 		poll = getScaledImage("poll.png", size);
@@ -26,12 +26,12 @@ public class ImageUtil {
 	
 	public static void reinitBackground(String color) {
 		darkBG = getScaledImage(color + "_bg.png", size);
-		Config.boardBgImg = darkBG;
+		Config.boardBgImg = color;
 	}
 	
 	public static void reinitQueen(String type) {
 		queen = getScaledImage(type + "_queen.png", size);
-		Config.defaultQueen = queen;
+		Config.defaultQueen = type;
 	}
 	
 	public static ImageIcon getImageIcon(String name) {
